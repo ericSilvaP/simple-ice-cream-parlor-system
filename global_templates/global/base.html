@@ -1,0 +1,18 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    {% include 'global/partials/head.html' %}
+    <title>
+      {% block title %}
+      {% endblock title %}
+      Sorvetes
+    </title>
+  </head>
+  <body>
+    <main>
+      {% block content %}
+      {% endblock content %}
+    </main>
+  </body>
+</html>
