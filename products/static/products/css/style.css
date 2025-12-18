@@ -17,13 +17,18 @@ body {
   font-family: var(--font-primary);
 }
 
+#logo {
+  height: 8rem;
+  width: 8rem;
+}
+
 #header,
 header {
   background-color: var(--color-01);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 3rem 1.5rem;
+  padding: 0.8rem 1.5rem;
 }
 
 li {
