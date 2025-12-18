@@ -1,0 +1,16 @@
+<div class="product-card-container">
+  <div class="image-container">
+    <img src="{{ product.cover.url }}" alt="produto imagem">
+  </div>
+  <div class="prod-info">
+    <div class="lay-1">
+      <div class="prod-name">{{ product.name }}</div>
+      <div class="add-to-cart-button">+</div>
+    </div>
+    <hr>
+    <div class="lay-2">
+      <div class="price">R$ {{ product.price }}</div>
+      <div class="quantity">{{ quantity_text }}</div>
+    </div>
+  </div>
+</div>
