@@ -1,0 +1,32 @@
+:root {
+  --bg-color: #ffeaea;
+  --color-dark-text: #444;
+  --font-primary: sans-serif;
+  --font-headings: 'Roboto Slab', serif;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 1.6rem;
+  font-family: var(--font-primary);
+  background: var(--bg-color);
+  color: var(--color-dark-text);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-headings);
+}
