@@ -142,6 +142,14 @@ header li:hover {
 }
 
 /* PRODUCTS */
+.main-title {
+  color: var(--color-04);
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 1.5rem;
+}
+
 .cards-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
