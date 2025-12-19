@@ -20,6 +20,12 @@ body {
   font-family: var(--font-primary);
 }
 
+/* GENERAL */
+.center {
+  margin: auto;
+  text-align: center;
+}
+
 /* HEADER */
 #logo {
   height: 8rem;
@@ -150,7 +156,13 @@ header li:hover {
   max-width: 25rem;
   overflow: hidden;
   box-shadow: var(--shadow-light);
+  transition: all ease-in-out 300ms;
   border: 1px solid var(--color-02);
+}
+
+.product-card-container:hover {
+  transition: all ease-in-out 300ms;
+  transform: scale(1.02);
 }
 
 .prod-info {

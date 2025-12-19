@@ -10,7 +10,7 @@ class Category(models.Model):
 
 class Product(models.Model):
     name = models.CharField(max_length=65)
-    price = models.DecimalField(decimal_places=2)
+    price = models.DecimalField(max_digits=6, decimal_places=2)
     quantity = models.FloatField()
     quantity_unit = models.CharField(max_length=65)
     cover = models.ImageField(

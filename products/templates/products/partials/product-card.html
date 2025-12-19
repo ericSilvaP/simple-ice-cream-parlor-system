@@ -1,6 +1,12 @@
+{% load static %}
 <div class="product-card-container">
   <div class="image-container">
-    <img src="{{ product.cover.url }}" alt="produto imagem">
+    {% if product.cover %}
+      <img src="{{ product.cover.url }}" alt="produto imagem">
+    {% else %}
+      <img src="{% static 'products/images/system-logo.png' %}"
+           alt="produto imagem">
+    {% endif %}
   </div>
   <div class="prod-info">
     <div class="lay-1">
