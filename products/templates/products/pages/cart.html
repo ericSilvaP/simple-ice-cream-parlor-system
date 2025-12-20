@@ -1,0 +1,41 @@
+{% extends "global/base.html" %}
+{% block title %}
+  Carrinho
+{% endblock title %}
+{% block content %}
+  <div class="cart-container">
+    <div class="cart-title">Produtos</div>
+    <hr>
+    {% if order %}
+      {% for product, quantity in order %}
+        <div class="cart-product">
+          <div class="cart-img">
+            {% if product.cover %}
+              <img src="{{ product.cover.url }}" alt="imagem do produto">
+            {% else %}
+              <img src="products/images/system-logo.png" alt="logo do sistema">
+            {% endif %}
+          </div>
+          <div class="cart-product-info">
+            <div class="cart-prod-name">{{ product.name }}</div>
+            <div class="cart-prod-price">{{ product.price }}</div>
+          </div>
+          <div class="cart-prod-buttons">
+            <button class="minus-product-button">-</button>
+            {{ quantity }}
+            <button class="plus-product-button">+</button>
+          </div>
+        </div>
+        <hr>
+      {% endfor %}
+      <div class="bottom-cart-info">
+        <div class="subtotal-cart">
+          <div class="subtotal">Sub-total</div>
+          <div class="subtotal-value">R$ {{ total }}</div>
+        </div>
+      </div>
+    {% else %}
+      <div class="center">Sem produtos no carrinho</div>
+    {% endif %}
+  </div>
+{% endblock content %}

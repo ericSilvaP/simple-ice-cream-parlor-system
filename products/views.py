@@ -9,3 +9,7 @@ def show_products(request):
         "products/pages/products.html",
         context={"products": Product.objects.all()},
     )
+
+
+def cart(request):
+    return render(request, "products/pages/cart.html")
