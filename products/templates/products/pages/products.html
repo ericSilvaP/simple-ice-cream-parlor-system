@@ -7,6 +7,7 @@
   <div class="center main-title">
     <h1>Nossos Produtos</h1>
   </div>
+  {% include 'global/partials/messages.html' %}
   {% if products %}
     <div class="cards-grid">
       {% for product in products %}
