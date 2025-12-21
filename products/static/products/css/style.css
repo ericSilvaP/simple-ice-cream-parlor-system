@@ -192,17 +192,18 @@ header li:hover {
   align-items: center;
   padding: 0.5rem 1rem;
 }
-
-.product-card-container .lay-1 .add-to-cart-button {
+.add-to-cart-button,
+.add-to-cart-button a {
   font-size: 2.5rem;
   color: var(--color-02);
   text-shadow: 1px 1px 0.5px rgba(0, 0, 0, 0.3);
-  cursor: pointer;
+  transition: all ease-in-out 300ms;
+  text-decoration: none;
 }
 
-.product-card-container .lay-1 .add-to-cart-button:hover {
-  transition: 300ms;
-  transform: scale(1.1);
+.add-to-cart-button:hover {
+  transition: all ease-in-out 300ms;
+  transform: scale(1.5);
 }
 
 .product-card-container .lay-2 {
