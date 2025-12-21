@@ -11,7 +11,9 @@
   <div class="prod-info">
     <div class="lay-1">
       <div class="prod-name">{{ product.name }}</div>
-      <div class="add-to-cart-button">+</div>
+      <div class="add-to-cart-button">
+        <a href="{% url 'products:add_to_cart' product.id %}">+</a>
+      </div>
     </div>
     <hr>
     <div class="lay-2">
