@@ -13,7 +13,8 @@
   --spacing-gutter-medium: 3rem;
   --spacing-gutter-large: 4rem;
 
-  --shadow-light: 2px 2px 1px rgba(0, 0, 0, 0.3);
+  --shadow-light: 1px 1px 5px rgba(0, 0, 0, 0.3);
+  --shadow-medium: 2px 2px 1px rgba(0, 0, 0, 0.3);
 }
 
 body {
@@ -163,7 +164,7 @@ header li:hover {
   border-radius: 1rem;
   max-width: 25rem;
   overflow: hidden;
-  box-shadow: var(--shadow-light);
+  box-shadow: var(--shadow-medium);
   transition: all ease-in-out 300ms;
   border: 1px solid var(--color-02);
 }
@@ -182,7 +183,7 @@ header li:hover {
   margin: auto;
 }
 
-.image-container img {
+img {
   max-width: 100%;
 }
 
@@ -208,6 +209,94 @@ header li:hover {
 
 .product-card-container .lay-2 {
   padding: 0.5rem 1rem 1.2rem 1rem;
+}
+
+/* CART */
+.cart-container {
+  background-color: white;
+  max-width: fit-content;
+  border-radius: 1rem;
+  padding: 3rem 2rem;
+  margin-top: var(--spacing-gutter-medium);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  box-shadow: var(--shadow-light);
+}
+
+.orange-button {
+  width: fit-content;
+  cursor: pointer;
+  background-color: var(--color-04);
+  color: white;
+  padding: 1.3rem 0.8rem;
+  border: none;
+  min-width: 9rem;
+  font-weight: bolder;
+  border-radius: 0.6rem;
+  transition: all ease-in-out 300ms;
+  margin-top: 0.5rem;
+  box-shadow: var(--shadow-light);
+  letter-spacing: 0.8px;
+}
+
+.orange-button:hover {
+  border: 1px solid var(--color-04);
+  background-color: white;
+  color: var(--color-04);
+  transition: all ease-in-out 300ms;
+}
+
+.cart-bottom {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 2rem;
+}
+
+.subtotal-cart {
+  font-weight: bold;
+  font-size: 14pt;
+}
+
+.subtotal-value {
+  color: var(--color-02);
+}
+
+/* CART PRODUCT CARD */
+.cart-product {
+  display: flex;
+  gap: var(--spacing-gutter-medium);
+  margin: 2.5rem 0;
+}
+
+.cart-img {
+  width: 13rem;
+  border-radius: 0.8rem;
+  overflow: hidden;
+}
+
+.cart-product-info {
+  display: flex;
+  padding: 0.7rem 0;
+  flex-direction: column;
+  gap: 0.8rem;
+  text-align: left;
+}
+
+.cart-product-buttons {
+  display: flex;
+  margin-top: 2rem;
+  height: fit-content;
+  align-items: center;
+  gap: 2rem;
+}
+
+.cart-product-buttons button {
+  border: none;
+  background-color: transparent;
+  color: var(--color-02);
+  font-size: 22pt;
+  cursor: pointer;
 }
 
 @media (min-width: 400px) {
