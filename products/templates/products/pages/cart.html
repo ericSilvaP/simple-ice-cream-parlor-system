@@ -1,41 +1,31 @@
 {% extends "global/base.html" %}
+{% load static %}
 {% block title %}
-  Carrinho
+  Carrinho |
 {% endblock title %}
 {% block content %}
-  <div class="cart-container">
-    <div class="cart-title">Produtos</div>
-    <hr>
+  <div class="cart-container center">
     {% if order %}
+      <div class="cart-title">Produtos</div>
+      <hr>
       {% for product, quantity in order %}
-        <div class="cart-product">
-          <div class="cart-img">
-            {% if product.cover %}
-              <img src="{{ product.cover.url }}" alt="imagem do produto">
-            {% else %}
-              <img src="products/images/system-logo.png" alt="logo do sistema">
-            {% endif %}
-          </div>
-          <div class="cart-product-info">
-            <div class="cart-prod-name">{{ product.name }}</div>
-            <div class="cart-prod-price">{{ product.price }}</div>
-          </div>
-          <div class="cart-prod-buttons">
-            <button class="minus-product-button">-</button>
-            {{ quantity }}
-            <button class="plus-product-button">+</button>
-          </div>
-        </div>
+        {% include 'products/partials/cart-product.html' %}
         <hr>
       {% endfor %}
-      <div class="bottom-cart-info">
+      <div class="cart-bottom">
         <div class="subtotal-cart">
           <div class="subtotal">Sub-total</div>
-          <div class="subtotal-value">R$ {{ total }}</div>
+          <div class="subtotal-value">R$ 00,00</div>
+        </div>
+        <div class="confirm-button-cart-container">
+          <button class="confirm-cart-button orange-button">Confirmar Compra</button>
         </div>
       </div>
     {% else %}
       <div class="center">Sem produtos no carrinho</div>
+      <div class="back-button-container center">
+        <button class="back-button orange-button">Voltar</button>
+      </div>
     {% endif %}
   </div>
 {% endblock content %}
