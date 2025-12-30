@@ -13,17 +13,20 @@ def show_products(request):
 
 def add_to_cart(request, id):
     product = Product.objects.get(pk=id)
-    cart = request.session.get("cart", {})
-    pk = str(product.pk)
+    cart = request.session.get("cart")
+    if not cart:
+        cart = {}
     messages.success(request, "Produto adicionado ao carrinho!")
-    if pk not in cart:
-        request.session["cart"].update({str(pk): 1})
+    cart.update({str(product.pk): 1})
+    request.session["cart"] = cart
 
     return redirect("products:products")
 
 
 def cart(request):
-    order = request.session.get("cart", {})
+    order = request.session.get("cart")
+    if not order:
+        order = {}
     products = [Product.objects.get(id=id) for id in order.keys()]
     order = list(zip(products, order.values()))
     return render(request, "products/pages/cart.html", context={"order": order})
