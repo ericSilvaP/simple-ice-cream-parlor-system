@@ -23,4 +23,7 @@ def add_to_cart(request, id):
 
 
 def cart(request):
-    return render(request, "products/pages/cart.html")
+    order = request.session.get("cart", {})
+    products = [Product.objects.get(id=id) for id in order.keys()]
+    order = list(zip(products, order.values()))
+    return render(request, "products/pages/cart.html", context={"order": order})
