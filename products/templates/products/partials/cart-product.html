@@ -1,0 +1,22 @@
+{% load static %}
+<div class="cart-product">
+  <div class="cart-img">
+    {% if product.cover %}
+      <img src="{{ product.cover.url }}" alt="imagem do produto">
+    {% else %}
+      <img src="{% static 'products/images/system-logo.png' %} "
+           alt="logo do sistema">
+    {% endif %}
+  </div>
+  <div class="cart-product-info">
+    <div class="cart-product-name">{{ product.name }}</div>
+    <div class="cart-product-price">
+      R$ <span class="cart-price">{{ product.price }}</span>
+    </div>
+  </div>
+  <div class="cart-product-buttons">
+    <button class="minus-product-button">-</button>
+    <span class="quantity">{{ quantity }}</span>
+    <button class="plus-product-button">+</button>
+  </div>
+</div>
