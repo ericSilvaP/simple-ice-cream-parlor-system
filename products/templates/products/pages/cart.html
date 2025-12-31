@@ -5,6 +5,9 @@
 {% endblock title %}
 {% block content %}
   <div class="cart-container center">
+    <form style="display:none;">
+      {% csrf_token %}
+    </form>
     {% if order %}
       <div class="cart-title">Produtos</div>
       <hr>

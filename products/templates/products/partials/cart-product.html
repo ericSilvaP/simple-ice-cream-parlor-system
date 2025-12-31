@@ -1,5 +1,5 @@
 {% load static %}
-<div class="cart-product">
+<div class="cart-product" id="cart-product-{{ product.id }}">
   <div class="cart-img">
     {% if product.cover %}
       <img src="{{ product.cover.url }}" alt="imagem do produto">
