@@ -11,8 +11,11 @@
   <div class="prod-info">
     <div class="lay-1">
       <div class="prod-name">{{ product.name }}</div>
-      <div class="add-to-cart-button">
-        <a href="{% url 'products:add_to_cart' product.id %}">+</a>
+      <div class="add-to-cart-button-container">
+        <form action="{% url 'products:add_to_cart' product.id %}" method="POST">
+          {% csrf_token %}
+          <button type="submit" class="add-to-cart-button">+</button>
+        </form>
       </div>
     </div>
     <hr>

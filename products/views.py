@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from products.models import Product
 from django.http import JsonResponse
+from django.views.decorators.http import require_POST
 
 
 def show_products(request):
@@ -12,6 +13,7 @@ def show_products(request):
     )
 
 
+@require_POST
 def add_to_cart(request, id):
     product = Product.objects.get(pk=id)
     cart = request.session.get("cart")
@@ -33,14 +35,12 @@ def cart(request):
     return render(request, "products/pages/cart.html", context={"order": order})
 
 
+@require_POST
 def remove_from_cart(request, id):
-    if request.method == "POST":
-        cart = request.session.get("cart", {})
-        product_id = str(id)
-        if product_id in cart:
-            del cart[product_id]
-            request.session["cart"] = cart
+    cart = request.session.get("cart", {})
+    product_id = str(id)
+    if product_id in cart:
+        del cart[product_id]
+        request.session["cart"] = cart
 
-        return JsonResponse({"success": True})
-
-    return JsonResponse({"error": "Método inválido"}, status=405)
+    return JsonResponse({"success": True})
