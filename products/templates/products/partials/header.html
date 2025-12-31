@@ -14,13 +14,15 @@
       </div>
       <ul id="nav-options">
         <li class="nav-items">
-          <a href="{% url 'products:products' %}" class="nav-link selected">produtos</a>
+          <a href="{% url 'products:products' %}"
+             class="nav-link {% if request.resolver_match.url_name == 'products' %}selected{% endif %}">produtos</a>
         </li>
         <li class="nav-items">
           <a href="" class="nav-link">compras</a>
         </li>
         <li class="nav-items">
-          <a href="{% url 'products:cart' %}" class="nav-link">carrinho</a>
+          <a href="{% url 'products:cart' %}"
+             class="nav-link {% if request.resolver_match.url_name == 'cart' %}selected{% endif %}">carrinho</a>
         </li>
         <li class="nav-items">
           <a href="" class="nav-link">sair</a>
@@ -30,13 +32,15 @@
   </header>
   <ul id="lateral-menu" class="display-none">
     <li class="nav-items">
-      <a href="" class="nav-link selected">produtos</a>
+      <a href=""
+         class="nav-link {% if request.resolver_match.url_name == 'products' %}selected{% endif %}">produtos</a>
     </li>
     <li class="nav-items">
       <a href="" class="nav-link">compras</a>
     </li>
     <li class="nav-items">
-      <a href="{% url 'products:cart' %}" class="nav-link">carrinho</a>
+      <a href="{% url 'products:cart' %}"
+         class="nav-link {% if request.resolver_match.url_name == 'cart' %}selected{% endif %}">carrinho</a>
     </li>
     <li class="nav-items">
       <a href="" class="nav-link">sair</a>
