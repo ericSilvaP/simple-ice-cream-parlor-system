@@ -258,7 +258,7 @@ img {
   font-size: 14pt;
 }
 
-.subtotal-value {
+.subtotal-value-container {
   color: var(--color-02);
 }
 

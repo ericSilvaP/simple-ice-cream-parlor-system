@@ -1,11 +1,14 @@
 const pricesSpan = document.querySelectorAll('.cart-price')
 const subtotalDiv = document.querySelector('.subtotal-value')
 
-// let subtotal = prices.reduce((p1, p2) => p1 + p2)
 function getTagValue(element) {
-  return element.textContent.replace(',', '.')
-  // }
-  // for (let priceSpan of pricesSpan) {
-  //   Number(priceSpan.textContent).
+  let [integers, cents] = element.textContent.split(',')
+  integers = integers.replace('.', '')
+  return Number([integers, cents].join('.'))
 }
-console.log(pricesSpan)
+
+const total = [...pricesSpan]
+  .map(getTagValue)
+  .reduce((sum, value) => sum + value, 0)
+
+subtotalDiv.textContent = total.toLocaleString('pt-br')
