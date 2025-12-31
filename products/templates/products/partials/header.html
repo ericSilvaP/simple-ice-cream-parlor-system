@@ -2,7 +2,7 @@
 <div id="header-container">
   <header id="header">
     <div class="logo-container">
-      <a href="">
+      <a href="{% url 'products:products' %}">
         <img src="{% static 'products/images/system-logo-no-bg.png' %}"
              alt="system-logo"
              id="logo">
@@ -14,13 +14,13 @@
       </div>
       <ul id="nav-options">
         <li class="nav-items">
-          <a href="" class="nav-link selected">produtos</a>
+          <a href="{% url 'products:products' %}" class="nav-link selected">produtos</a>
         </li>
         <li class="nav-items">
           <a href="" class="nav-link">compras</a>
         </li>
         <li class="nav-items">
-          <a href="" class="nav-link">carrinho</a>
+          <a href="{% url 'products:cart' %}" class="nav-link">carrinho</a>
         </li>
         <li class="nav-items">
           <a href="" class="nav-link">sair</a>
@@ -36,7 +36,7 @@
       <a href="" class="nav-link">compras</a>
     </li>
     <li class="nav-items">
-      <a href="" class="nav-link">carrinho</a>
+      <a href="{% url 'products:cart' %}" class="nav-link">carrinho</a>
     </li>
     <li class="nav-items">
       <a href="" class="nav-link">sair</a>

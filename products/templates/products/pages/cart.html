@@ -30,7 +30,9 @@
     {% else %}
       <div class="center">Sem produtos no carrinho</div>
       <div class="back-button-container center">
-        <button class="back-button orange-button">Voltar</button>
+        <button class="back-button orange-button">
+          <a href="{% url 'products:products' %}">Voltar</a>
+        </button>
       </div>
     {% endif %}
   </div>
