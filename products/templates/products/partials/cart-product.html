@@ -15,8 +15,13 @@
     </div>
   </div>
   <div class="cart-product-buttons">
-    <button class="minus-product-button">-</button>
+    <div class="minus-product-button">-</div>
+    <input type="number"
+           class="quantity-input"
+           name="quantity-{{ product.id }}"
+           value="{{ quantity }}"
+           min="1">
     <span class="quantity">{{ quantity }}</span>
-    <button class="plus-product-button">+</button>
+    <div class="plus-product-button">+</div>
   </div>
 </div>

@@ -4,10 +4,10 @@
   Carrinho |
 {% endblock title %}
 {% block content %}
-  <div class="cart-container center">
-    <form style="display:none;">
-      {% csrf_token %}
-    </form>
+  <form class="cart-container center"
+        method="POST"
+        action="{% url 'products:create_order' %}">
+    {% csrf_token %}
     {% if order %}
       <div class="cart-title">Produtos</div>
       <hr>
@@ -24,7 +24,7 @@
           </div>
         </div>
         <div class="confirm-button-cart-container">
-          <button class="confirm-cart-button orange-button">Confirmar Compra</button>
+          <button class="confirm-cart-button orange-button" type="submit">Confirmar Compra</button>
         </div>
       </div>
     {% else %}
@@ -35,5 +35,5 @@
         </button>
       </div>
     {% endif %}
-  </div>
+  </form>
 {% endblock content %}
