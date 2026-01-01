@@ -1,6 +1,7 @@
-from django.shortcuts import render, redirect
+import re
+from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib import messages
-from products.models import Product
+from products.models import Order, OrderItem, Product
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
 
@@ -44,3 +45,29 @@ def remove_from_cart(request, id):
         request.session["cart"] = cart
 
     return JsonResponse({"success": True})
+
+
+@require_POST
+def create_order(request):
+    quantities = {
+        x[-1]: int(y) for x, y in request.POST.items() if x.startswith("quantity")
+    }
+    del request.session["cart"]
+    products = [Product.objects.get(id=id) for id in quantities.keys()]
+    total_value = sum(
+        [
+            float(product.price) * quantities.get(str(product.pk), 1)
+            for product in products
+        ]
+    )
+
+    order = Order.objects.create(total_value=total_value)
+    for product in products:
+        product_instance = get_object_or_404(Product, pk=product.pk)
+        OrderItem.objects.create(
+            order=order,
+            product=product_instance,
+            quantity=quantities.get(str(product.pk), 1),
+        )
+    messages.success(request, "Compra realizada com sucesso!")
+    return redirect("products:products")
