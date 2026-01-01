@@ -33,8 +33,11 @@ document.querySelectorAll('.plus-product-button').forEach((button) => {
   button.addEventListener('click', () => {
     const product = button.closest('.cart-product')
     const quantitySpan = product.querySelector('.quantity')
+    const quantityInput = product.querySelector('.quantity-input')
 
-    quantitySpan.textContent = Number(quantitySpan.textContent) + 1
+    const qnt = Number(quantitySpan.textContent) + 1
+    quantitySpan.textContent = qnt
+    quantityInput.value = qnt
     calculateSubtotal()
   })
 })
@@ -43,15 +46,18 @@ document.querySelectorAll('.minus-product-button').forEach((button) => {
   button.addEventListener('click', async () => {
     const product = button.closest('.cart-product')
     const quantitySpan = product.querySelector('.quantity')
+    const quantityInput = product.querySelector('.quantity-input')
     const productId = product.id[product.id.length - 1]
 
     const current = Number(quantitySpan.textContent)
     if (current > 1) {
-      quantitySpan.textContent = current - 1
+      const qnt = current - 1
+      quantitySpan.textContent = qnt
+      quantityInput.value = qnt
       calculateSubtotal()
     } else {
       if (confirm('Excluir produto?')) {
-        const response = await fetch(`/cart/remove/${productId}`, {
+        const response = await fetch(`/carrinho/remover/${productId}`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
