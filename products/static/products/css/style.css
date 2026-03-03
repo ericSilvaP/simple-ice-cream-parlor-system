@@ -27,6 +27,34 @@ body {
   text-align: center;
 }
 
+.container-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.main-btt {
+  padding: 1.2rem 2.5rem;
+  color: white;
+  background-color: var(--color-05);
+  border: none;
+  min-width: 10rem;
+  border-radius: 0.8rem;
+  transition: 150ms all ease-in-out;
+}
+
+.main-btt:hover {
+  color: black;
+  background-color: white;
+  border: 1px solid var(--color-05);
+  cursor: pointer;
+}
+
+.bold-title {
+  font-family: var(--font-primary);
+  margin-bottom: var(--spacing-gutter-medium);
+}
+
 /* HEADER */
 #logo {
   height: 8rem;
@@ -308,6 +336,36 @@ img {
   cursor: pointer;
 }
 
+/* REGISTER/LOGIN USER */
+.register-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-top: var(--spacing-gutter-medium);
+  padding: 0 var(--spacing-gutter-light);
+}
+
+/* USER FORM */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: calc(var(--spacing-gutter-light) / 2);
+}
+
+.form-group input {
+  min-width: 27rem;
+  min-height: 3.5rem;
+  border: 1px solid var(--color-04);
+  border-radius: 0.5rem;
+  font-size: 12pt;
+  padding: 0.2rem;
+}
+
+.form-submit-btt-container button {
+  margin-top: 2rem;
+}
+
 @media (min-width: 400px) {
   /* HEADER */
   #nav-options {
@@ -324,5 +382,10 @@ img {
   /* PRODUCTS GRID */
   .cards-grid {
     grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+  }
+
+  /* USER FORM */
+  .form-group input {
+    min-width: 37rem;
   }
 }

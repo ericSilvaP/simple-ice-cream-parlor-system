@@ -1,9 +1,9 @@
-import re
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib import messages
 from products.models import Order, OrderItem, Product
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
+from .forms import RegisterUserForm
 
 
 def show_products(request):
@@ -71,3 +71,9 @@ def create_order(request):
         )
     messages.success(request, "Compra realizada com sucesso!")
     return redirect("products:products")
+
+
+def register_user(request):
+    return render(
+        request, "products/pages/register-user.html", context={"form": RegisterUserForm}
+    )

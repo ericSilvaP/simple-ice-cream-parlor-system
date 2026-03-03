@@ -1,0 +1,14 @@
+<div class="main-user-form">
+  <form action="{{ form_action }}" method="POST">
+    {% csrf_token %}
+    {% for field in form %}
+      <div class="form-group">
+        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+        {{ field }}
+      </div>
+    {% endfor %}
+    <div class="form-submit-btt">
+      <button>{{ submit_button_text|default:"Enviar" }}</button>
+    </div>
+  </form>
+</div>
