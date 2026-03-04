@@ -62,6 +62,10 @@ body {
   margin-bottom: var(--spacing-gutter-medium);
 }
 
+.errorlist {
+  margin-top: 0.5rem;
+}
+
 /* HEADER */
 #logo {
   height: 8rem;
@@ -373,7 +377,8 @@ img {
   margin-top: 2rem;
 }
 
-.form-errors {
+.form-errors,
+.errorlist {
   color: var(--color-error);
 }
 

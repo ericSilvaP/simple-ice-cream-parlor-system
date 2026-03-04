@@ -19,6 +19,15 @@ class RegisterUserForm(forms.ModelForm):
         password_repeat = cleaned_data.get("password_repeat")
 
         if password != password_repeat:
-            raise forms.ValidationError("Senhas devem ser iguais")
+            raise forms.ValidationError("Senhas devem ser iguais.")
 
         return cleaned_data
+
+    def clean_email(self):
+        new_email = self.cleaned_data.get("email", "")
+        exists = User.objects.filter(email=new_email).exists()
+
+        if exists:
+            raise forms.ValidationError("Email já existe.")
+
+        return new_email
