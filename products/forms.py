@@ -7,8 +7,10 @@ class RegisterUserForm(forms.ModelForm):
         model = User
         fields = ["email", "username", "password"]
 
-    password_repeat = forms.CharField(label="Confirmar Senha")
-
+    password_repeat = forms.CharField(
+        label="Confirmar Senha", widget=forms.PasswordInput()
+    )
+    password = forms.CharField(widget=forms.PasswordInput())
     email = forms.EmailField(label="Email")
     username = forms.CharField(label="Nome")
 
