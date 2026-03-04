@@ -4,7 +4,8 @@ from django.urls import reverse
 from products.models import Order, OrderItem, Product
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
-from .forms import RegisterUserForm
+from .forms import LoginUserForm, RegisterUserForm
+from django.contrib.auth import authenticate, login
 
 
 def show_products(request):
@@ -98,6 +99,35 @@ def register_user_create(request):
         user.set_password(user.password)
         user.save()
         del request.session["register_user_form_data"]
-        return redirect("products:products")
+        return redirect("products:login_user")
 
     return redirect("products:register_user")
+
+
+def login_user_view(request):
+    form = LoginUserForm()
+    form_action = reverse("products:login_user_create")
+    return render(
+        request,
+        "products/pages/login-user.html",
+        context={
+            "form": form,
+            "form_action": form_action,
+        },
+    )
+
+
+@require_POST
+def login_user_create(request):
+    form = LoginUserForm(request.POST)
+    if form.is_valid():
+        user = authenticate(
+            request,
+            username=form.cleaned_data.get("username"),
+            password=form.cleaned_data.get("password"),
+        )
+        if user is not None:
+            login(request, user)
+            return redirect(reverse("products:products"))
+
+    return redirect("products:login_user")

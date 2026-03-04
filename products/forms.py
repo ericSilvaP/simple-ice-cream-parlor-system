@@ -10,7 +10,7 @@ class RegisterUserForm(forms.ModelForm):
     password_repeat = forms.CharField(
         label="Confirmar Senha", widget=forms.PasswordInput()
     )
-    password = forms.CharField(widget=forms.PasswordInput())
+    password = forms.CharField(widget=forms.PasswordInput(), label="Senha")
     email = forms.EmailField(label="Email")
     username = forms.CharField(label="Nome")
 
@@ -33,3 +33,8 @@ class RegisterUserForm(forms.ModelForm):
             raise forms.ValidationError("Email já existe.")
 
         return new_email
+
+
+class LoginUserForm(forms.Form):
+    username = forms.CharField(label="Nome")
+    password = forms.CharField(widget=forms.PasswordInput(), label="Senha")
