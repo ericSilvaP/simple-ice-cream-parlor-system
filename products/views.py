@@ -1,5 +1,6 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib import messages
+from django.urls import reverse
 from products.models import Order, OrderItem, Product
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
@@ -73,7 +74,30 @@ def create_order(request):
     return redirect("products:products")
 
 
-def register_user(request):
+def register_user_view(request):
+    form = RegisterUserForm(request.session.get("register_user_form_data"))
+    form_action = reverse("products:register_user_create")
     return render(
-        request, "products/pages/register-user.html", context={"form": RegisterUserForm}
+        request,
+        "products/pages/register-user.html",
+        context={
+            "form": form,
+            "form_action": form_action,
+        },
     )
+
+
+@require_POST
+def register_user_create(request):
+    POST = request.POST
+    request.session["register_user_form_data"] = POST
+    form = RegisterUserForm(POST)
+
+    if form.is_valid():
+        user = form.save(commit=False)
+        user.set_password(user.password)
+        user.save()
+        del request.session["register_user_form_data"]
+        return redirect("products:products")
+
+    return redirect("products:register_user")

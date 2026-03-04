@@ -7,6 +7,12 @@
         {{ field }}
       </div>
     {% endfor %}
+    {% if form.non_field_errors %}
+      <div class="form-errors center">
+        <div>ERRO</div>
+        {{ form.non_field_errors }}
+      </div>
+    {% endif %}
     <div class="form-submit-btt-container container-center">
       <button class="main-btt">{{ submit_button_text|default:"Enviar" }}</button>
     </div>

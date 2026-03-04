@@ -5,6 +5,13 @@
   --color-04: #f28b30;
   --color-05: #d94711;
 
+  --color-info: #4d86c4;
+  --color-debug: #4d86c4;
+  --color-success: #4a9c5d;
+  --color-alert: #927f40;
+  --color-warning: #927f40;
+  --color-error: #da525d;
+
   --color-dark-text: #444;
 
   --font-primary: 'Poppins';
@@ -364,6 +371,10 @@ img {
 
 .form-submit-btt-container button {
   margin-top: 2rem;
+}
+
+.form-errors {
+  color: var(--color-error);
 }
 
 @media (min-width: 400px) {
