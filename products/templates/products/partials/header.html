@@ -13,6 +13,11 @@
         <i class="fa-solid fa-bars"></i>
       </div>
       <ul id="nav-options">
+        {% if not user.is_authenticated %}
+          <li class="nav-items">
+            <a href="{% url 'products:login_user' %}" class="nav-link">entrar</a>
+          </li>
+        {% endif %}
         <li class="nav-items">
           <a href="{% url 'products:products' %}"
              class="nav-link {% if request.resolver_match.url_name == 'products' %}selected{% endif %}">produtos</a>
@@ -24,9 +29,14 @@
           <a href="{% url 'products:cart' %}"
              class="nav-link {% if request.resolver_match.url_name == 'cart' %}selected{% endif %}">carrinho</a>
         </li>
-        <li class="nav-items">
-          <a href="" class="nav-link">sair</a>
-        </li>
+        {% if user.is_authenticated %}
+          <li class="nav-items">
+            <form action="{% url 'products:logout' %}" method="POST">
+              {% csrf_token %}
+              <button type="submit" class="nav-link no-style-button logout-button">sair</button>
+            </form>
+          </li>
+        {% endif %}
       </ul>
     </nav>
   </header>

@@ -5,7 +5,8 @@ from products.models import Order, OrderItem, Product
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
 from .forms import LoginUserForm, RegisterUserForm
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 
 
 def show_products(request):
@@ -134,4 +135,11 @@ def login_user_create(request):
             messages.success(request, f"Seja bem-vindo(a), {user.get_username()}!")
             return redirect(reverse("products:products"))
 
+    return redirect("products:login_user")
+
+
+@login_required(login_url="products:login_user", redirect_field_name="next")
+@require_POST
+def logout_view(request):
+    logout(request)
     return redirect("products:login_user")
