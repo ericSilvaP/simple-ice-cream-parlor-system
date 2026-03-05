@@ -99,6 +99,7 @@ def register_user_create(request):
         user.set_password(user.password)
         user.save()
         del request.session["register_user_form_data"]
+        messages.success(request, "Usuário criado com sucesso!")
         return redirect("products:login_user")
 
     return redirect("products:register_user")
@@ -128,6 +129,7 @@ def login_user_create(request):
         )
         if user is not None:
             login(request, user)
+            messages.success(request, f"Seja bem-vindo(a), {user.get_username()}!")
             return redirect(reverse("products:products"))
 
     return redirect("products:login_user")
