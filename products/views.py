@@ -84,6 +84,7 @@ def register_user_view(request):
         context={
             "form": form,
             "form_action": form_action,
+            "submit_button_text": "Cadastrar",
         },
     )
 
@@ -114,6 +115,7 @@ def login_user_view(request):
         context={
             "form": form,
             "form_action": form_action,
+            "submit_button_text": "Entrar",
         },
     )
 

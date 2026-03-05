@@ -40,21 +40,41 @@ body {
   align-items: center;
 }
 
-.main-btt {
+.main-btt,
+.alt-btt {
   padding: 1.2rem 2.5rem;
+  min-width: 10rem;
+  border-radius: 0.8rem;
+  transition: 100ms all ease-in-out;
+  cursor: pointer;
+}
+
+.main-btt:hover,
+.alt-btt:hover {
+  transform: scale(1.05);
+}
+
+.main-btt {
   color: white;
   background-color: var(--color-05);
   border: none;
-  min-width: 10rem;
-  border-radius: 0.8rem;
-  transition: 150ms all ease-in-out;
 }
 
 .main-btt:hover {
   color: black;
   background-color: white;
   border: 1px solid var(--color-05);
-  cursor: pointer;
+}
+
+.alt-btt {
+  background-color: white;
+  border: 1px solid var(--color-05);
+}
+
+.alt-btt:hover {
+  color: white;
+  background-color: var(--color-05);
+  border: none;
 }
 
 .bold-title {
@@ -380,6 +400,10 @@ img {
 .form-errors,
 .errorlist {
   color: var(--color-error);
+}
+
+.register-button-container {
+  margin-top: var(--spacing-gutter-light);
 }
 
 @media (min-width: 400px) {

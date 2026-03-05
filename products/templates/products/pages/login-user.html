@@ -6,6 +6,11 @@
   <div class="register-container">
     <h1 class="bold-title">Entrar</h1>
     {% include 'global/partials/messages.html' %}
-    <div class="login-register-form-container">{% include 'products/partials/user-form.html' %}</div>
+    <div class="login-register-form-container">
+      {% include 'products/partials/user-form.html' %}
+      <div class="container-center register-button-container">
+        <button class="alt-btt">Cadastrar</button>
+      </div>
+    </div>
   </div>
 {% endblock content %}
