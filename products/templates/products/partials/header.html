@@ -24,7 +24,7 @@
         </li>
         {% if user.is_authenticated %}
           <li class="nav-items">
-            <a href="{% url 'products:orders' user.id %}"
+            <a href="{% url 'products:orders' %}"
                class="nav-link {% if request.resolver_match.url_name == 'orders' %}selected{% endif %}">compras</a>
           </li>
         {% endif %}
@@ -50,7 +50,7 @@
     </li>
     {% if user.is_authenticated %}
       <li class="nav-items">
-        <a href="{% url 'products:orders' user.id %}"
+        <a href="{% url 'products:orders' %}"
            class="nav-link {% if request.resolver_match.url_name == 'orders' %}selected{% endif %}">compras</a>
       </li>
     {% endif %}

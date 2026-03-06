@@ -144,3 +144,8 @@ def login_user_create(request):
 def logout_view(request):
     logout(request)
     return redirect("products:login_user")
+
+
+@login_required(login_url="products:login_user")
+def orders_view(request):
+    return render(request, "products/pages/orders.html")

@@ -1,0 +1,16 @@
+{% load static %}
+<div class="order-product-card-container">
+  <div class="image-container">
+    {% if product.cover %}
+      <img src="{{ product.cover.url }}" alt="produto imagem">
+    {% else %}
+      <img src="{% static 'products/images/system-logo.png' %}"
+           alt="produto imagem">
+    {% endif %}
+  </div>
+  <div class="order-product-info">
+    <span>Sorvete</span>
+    <span>R$ 12,99</span>
+    <span>Unidades: 1</span>
+  </div>
+</div>

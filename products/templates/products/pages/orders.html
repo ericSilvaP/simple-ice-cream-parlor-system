@@ -1,0 +1,11 @@
+{% extends "global/base.html" %}
+{% block title %}
+  Compras |
+{% endblock title %}
+{% block content %}
+  <div class="orders-container container-center">
+    <h1 class="bold-title">Compras</h1>
+    {% include 'global/partials/messages.html' %}
+    {% include 'products/partials/order-card.html' %}
+  </div>
+{% endblock content %}
