@@ -22,9 +22,12 @@
           <a href="{% url 'products:products' %}"
              class="nav-link {% if request.resolver_match.url_name == 'products' %}selected{% endif %}">produtos</a>
         </li>
-        <li class="nav-items">
-          <a href="" class="nav-link">compras</a>
-        </li>
+        {% if use.is_authenticated %}
+          <li class="nav-items">
+            <a href="{% url 'products:orders' user.id %}"
+               class="nav-link {% if request.resolver_match.url_name == 'orders' %}selected{% endif %}">compras</a>
+          </li>
+        {% endif %}
         <li class="nav-items">
           <a href="{% url 'products:cart' %}"
              class="nav-link {% if request.resolver_match.url_name == 'cart' %}selected{% endif %}">carrinho</a>
@@ -45,15 +48,23 @@
       <a href=""
          class="nav-link {% if request.resolver_match.url_name == 'products' %}selected{% endif %}">produtos</a>
     </li>
-    <li class="nav-items">
-      <a href="" class="nav-link">compras</a>
-    </li>
+    {% if use.is_authenticated %}
+      <li class="nav-items">
+        <a href="{% url 'products:orders' user.id %}"
+           class="nav-link {% if request.resolver_match.url_name == 'orders' %}selected{% endif %}">compras</a>
+      </li>
+    {% endif %}
     <li class="nav-items">
       <a href="{% url 'products:cart' %}"
          class="nav-link {% if request.resolver_match.url_name == 'cart' %}selected{% endif %}">carrinho</a>
     </li>
-    <li class="nav-items">
-      <a href="" class="nav-link">sair</a>
-    </li>
+    {% if user.is_authenticated %}
+      <li class="nav-items">
+        <form action="{% url 'products:logout' %}" method="POST">
+          {% csrf_token %}
+          <button type="submit" class="nav-link no-style-button logout-button">sair</button>
+        </form>
+      </li>
+    {% endif %}
   </ul>
 </div>
