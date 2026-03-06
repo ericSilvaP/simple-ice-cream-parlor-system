@@ -2,7 +2,7 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib import messages
 from django.urls import reverse
 from products.models import Order, OrderItem, Product
-from django.http import JsonResponse
+from django.http import HttpRequest, JsonResponse
 from django.views.decorators.http import require_POST
 from .forms import LoginUserForm, RegisterUserForm
 from django.contrib.auth import authenticate, login, logout
@@ -51,7 +51,8 @@ def remove_from_cart(request, id):
 
 
 @require_POST
-def create_order(request):
+@login_required(login_url="products:login_user")
+def create_order(request: HttpRequest):
     quantities = {
         x[-1]: int(y) for x, y in request.POST.items() if x.startswith("quantity")
     }
@@ -64,7 +65,7 @@ def create_order(request):
         ]
     )
 
-    order = Order.objects.create(total_value=total_value)
+    order = Order.objects.create(total_value=total_value, user=request.user)
     for product in products:
         product_instance = get_object_or_404(Product, pk=product.pk)
         OrderItem.objects.create(
