@@ -1,6 +1,6 @@
 <div class="order-card-container">
   <div class="order-header">
-    <span class="order-date">12 de dezembro de 2005</span>
+    <span class="order-date">{{ order.created_at|date:"d \\d\\e F \\d\\e Y" }}</span>
     <span class="order-total-value">R$ {{ order.total_value }}</span>
   </div>
   <div class="order-body">

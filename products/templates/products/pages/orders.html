@@ -6,8 +6,10 @@
   <div class="orders-container container-center">
     <h1 class="bold-title">Compras</h1>
     {% include 'global/partials/messages.html' %}
-    {% for order in orders %}
-      {% include 'products/partials/order-card.html' %}
-    {% endfor %}
+    <div class="orders-card-container">
+      {% for order in orders %}
+        {% include 'products/partials/order-card.html' %}
+      {% endfor %}
+    </div>
   </div>
 {% endblock content %}
