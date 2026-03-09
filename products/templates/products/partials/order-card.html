@@ -1,14 +1,18 @@
 <div class="order-card-container">
   <div class="order-header">
     <span class="order-date">12 de dezembro de 2005</span>
-    <span class="order-total-value">R$ 12,99</span>
+    <span class="order-total-value">R$ {{ order.total_value }}</span>
   </div>
   <div class="order-body">
     <div class="order-body-header">
       <span>Entregue</span>
-      <span>Quantidade Total: 2</span>
+      <span>Quantidade Total: {{ order.items_number }}</span>
     </div>
     <hr>
-    <div class="order-products">{% include 'products/partials/order-product-card.html' %}</div>
+    <div class="order-products">
+      {% for item in order.items.all %}
+        {% include 'products/partials/order-product-card.html' %}
+      {% endfor %}
+    </div>
   </div>
 </div>

@@ -7,6 +7,7 @@ from django.views.decorators.http import require_POST
 from .forms import LoginUserForm, RegisterUserForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.db.models import Sum
 
 
 def show_products(request):
@@ -148,4 +149,8 @@ def logout_view(request):
 
 @login_required(login_url="products:login_user")
 def orders_view(request):
-    return render(request, "products/pages/orders.html")
+    orders = Order.objects.filter(user=request.user).annotate(
+        items_number=Sum("items__quantity")
+    )
+
+    return render(request, "products/pages/orders.html", context={"orders": orders})
