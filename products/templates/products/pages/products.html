@@ -16,7 +16,7 @@
     </div>
   {% else %}
     <div class="center">
-      <h1>Sem produtos disponíveis</h1>
+      <h1>{{ no_recipes_message|default:"Sem produtos disponíveis" }}</h1>
     </div>
   {% endif %}
 {% endblock content %}

@@ -1,3 +1,5 @@
+from os import name
+
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib import messages
 from django.urls import reverse
@@ -11,10 +13,23 @@ from django.db.models import Sum
 
 
 def show_products(request):
+    search_term = request.GET.get("q", "")
+    no_recipes_message = ""
+    if search_term:
+        products = Product.objects.filter(name__icontains=search_term)
+        messages.info(request, f'Pesquisa para "{search_term}"')
+        if not products:
+            no_recipes_message = "Nenhum produto foi encontrado"
+    else:
+        products = Product.objects.all()
+
     return render(
         request,
         "products/pages/products.html",
-        context={"products": Product.objects.all()},
+        context={
+            "products": products,
+            "no_recipes_message": no_recipes_message,
+        },
     )
 
 
