@@ -9,7 +9,9 @@
     <div class="login-register-form-container">
       {% include 'products/partials/user-form.html' %}
       <div class="container-center register-button-container">
-        <button class="alt-btt">Cadastrar</button>
+        <a href="{% url 'products:register_user' %}">
+          <button class="alt-btt">Cadastrar</button>
+        </a>
       </div>
     </div>
   </div>
