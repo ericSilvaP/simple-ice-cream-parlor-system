@@ -422,13 +422,14 @@ img {
 
 /* ORDERS */
 .orders-container {
-  margin-top: var(--spacing-gutter-light);
+  margin: var(--spacing-gutter-light) 0;
   padding: 0 var(--spacing-gutter-large);
 }
 
 .orders-card-container {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: var(--spacing-gutter-medium);
 }
 
@@ -468,7 +469,7 @@ img {
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  min-width: 40rem;
+  min-width: 30rem;
 }
 
 .order-product-card-container img,
@@ -519,5 +520,12 @@ img {
   /* USER FORM */
   .form-group input {
     min-width: 37rem;
+  }
+}
+
+@media (min-width: 567px) {
+  /* ORDERS */
+  .order-products {
+    min-width: 50rem;
   }
 }
