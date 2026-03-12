@@ -7,7 +7,7 @@
       {% endif %}
       {% for page in pagination_range.pagination %}
         <a class="page-link page-item {% if page == pagination_range.current_page %}actual-page{% endif %}"
-           href="?page={{ page }}">{{ page }}</a>
+           href="?page={{ page }}&q={{ request.GET.q }}&min_value={{ request.GET.min_value }}&max_value={{ request.GET.max_value }}">{{ page }}</a>
       {% endfor %}
       {% if pagination_range.last_page_out_of_range %}
         <span class="page-item">...</span>
