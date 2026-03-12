@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib import messages
 from django.urls import reverse
-from products.models import Order, OrderItem, Product
+from products.models import Category, Order, OrderItem, Product
 from django.http import HttpRequest, JsonResponse
 from django.views.decorators.http import require_POST
 
@@ -15,10 +15,17 @@ from django.core.paginator import Paginator
 
 def show_products(request):
     products = Product.objects.all()
+    categories = Category.objects.all()
+
     # SEARCH AND FILTER
     search_term = request.GET.get("q", "")
-    min_value = request.GET.get("min-value")
-    max_value = request.GET.get("max-value")
+    min_value = request.GET.get("min_value")
+    max_value = request.GET.get("max_value")
+    categories_filter = [
+        categorie.pk
+        for categorie in categories
+        if request.GET.get(f"category_{categorie.name}") == "on"
+    ]
     no_recipes_message = ""
 
     if search_term:
@@ -28,6 +35,8 @@ def show_products(request):
         products = products.filter(price__gte=min_value)
     if max_value:
         products = products.filter(price__lte=max_value)
+    if categories_filter:
+        products = products.filter(category__in=categories_filter)
 
     # PAGINATION
     try:
@@ -50,6 +59,7 @@ def show_products(request):
             "products": page_obj,
             "no_recipes_message": no_recipes_message,
             "pagination_range": pagination_range,
+            "categories": categories,
         },
     )
 

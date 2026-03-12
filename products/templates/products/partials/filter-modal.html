@@ -16,5 +16,13 @@
              class="min-price-input"
              placeholder="100">
     </div>
+    <div class="category-filter">
+      {% for category in categories %}
+        <input type="checkbox"
+               name="category_{{ category.name }}"
+               id="category-{{ category.name }}">
+        <label for="category-{{ category.name }}">{{ category.name }}</label>
+      {% endfor %}
+    </div>
   </div>
 </div>
