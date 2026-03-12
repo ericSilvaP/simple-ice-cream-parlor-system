@@ -1,6 +1,7 @@
 {% comment %} precisa estar dentro de um formulário de pesquisa {% endcomment %}
 <div class="modal hidden" id="filter-modal">
   <div class="filter-modal-container">
+    <h3 class="center">Escolha os filtros</h3>
     <div class="price-filter">
       <label for="filter-min-value">Valor Mínimo</label>
       <input name="min_value"
@@ -17,12 +18,20 @@
              placeholder="100">
     </div>
     <div class="category-filter">
-      {% for category in categories %}
-        <input type="checkbox"
-               name="category_{{ category.name }}"
-               id="category-{{ category.name }}">
-        <label for="category-{{ category.name }}">{{ category.name }}</label>
-      {% endfor %}
+      <strong>Categorias</strong>
+      <div class="categories-filter">
+        {% for category in categories %}
+          <div class="categorie-opt">
+            <input type="checkbox"
+                   name="category_{{ category.name }}"
+                   id="category-{{ category.name }}">
+            <label for="category-{{ category.name }}">{{ category.name }}</label>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="filter-ok-button-container">
+      <span class="filter-ok-button orange-button filter-button-toggle">OK</span>
     </div>
   </div>
 </div>

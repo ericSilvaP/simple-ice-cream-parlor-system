@@ -1,9 +1,11 @@
 let modals = document.querySelectorAll('.modal')
-const filterButton = document.querySelector('#filter-button-container')
+const filterButtons = document.querySelectorAll('.filter-button-toggle')
 const filterModal = document.querySelector('#filter-modal')
 
-filterButton.addEventListener('click', () => {
-  filterModal.classList.toggle('hidden')
+filterButtons.forEach((filterButton) => {
+  filterButton.addEventListener('click', () => {
+    filterModal.classList.toggle('hidden')
+  })
 })
 
 modals.forEach((modal) => {
