@@ -1,0 +1,20 @@
+{% comment %} precisa estar dentro de um formulário de pesquisa {% endcomment %}
+<div class="modal hidden" id="filter-modal">
+  <div class="filter-modal-container">
+    <div class="price-filter">
+      <label for="filter-min-value">Valor Mínimo</label>
+      <input name="min-value"
+             id="filter-min-value"
+             type="number"
+             class="min-price-input"
+             min="0"
+             placeholder="10">
+      <label for="filter-max-value">Valor Máximo</label>
+      <input name="max-value"
+             id="filter-max-value"
+             type="number"
+             class="min-price-input"
+             placeholder="100">
+    </div>
+  </div>
+</div>

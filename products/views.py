@@ -14,16 +14,20 @@ from django.core.paginator import Paginator
 
 
 def show_products(request):
-    # SEARCH
+    products = Product.objects.all()
+    # SEARCH AND FILTER
     search_term = request.GET.get("q", "")
+    min_value = request.GET.get("min-value")
+    max_value = request.GET.get("max-value")
     no_recipes_message = ""
+
     if search_term:
-        products = Product.objects.filter(name__icontains=search_term)
+        products = products.filter(name__icontains=search_term)
         messages.info(request, f'Pesquisa para "{search_term}"')
-        if not products:
-            no_recipes_message = "Nenhum produto foi encontrado"
-    else:
-        products = Product.objects.all()
+    if min_value:
+        products = products.filter(price__gte=min_value)
+    if max_value:
+        products = products.filter(price__lte=max_value)
 
     # PAGINATION
     try:
@@ -35,6 +39,9 @@ def show_products(request):
     page_obj = paginator.get_page(current_page)
 
     pagination_range = make_pagination_range(paginator.page_range, 5, current_page)
+
+    if not products:
+        no_recipes_message = "Nenhum produto foi encontrado"
 
     return render(
         request,
