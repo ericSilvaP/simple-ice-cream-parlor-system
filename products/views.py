@@ -1,18 +1,20 @@
-from os import name
-
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib import messages
 from django.urls import reverse
 from products.models import Order, OrderItem, Product
 from django.http import HttpRequest, JsonResponse
 from django.views.decorators.http import require_POST
+
+from utils.pagination import make_pagination_range
 from .forms import LoginUserForm, RegisterUserForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.db.models import Sum
+from django.core.paginator import Paginator
 
 
 def show_products(request):
+    # SEARCH
     search_term = request.GET.get("q", "")
     no_recipes_message = ""
     if search_term:
@@ -23,12 +25,24 @@ def show_products(request):
     else:
         products = Product.objects.all()
 
+    # PAGINATION
+    try:
+        current_page = int(request.GET.get("page", 1))
+    except ValueError:
+        current_page = 1
+
+    paginator = Paginator(products, 9)
+    page_obj = paginator.get_page(current_page)
+
+    pagination_range = make_pagination_range(paginator.page_range, 5, current_page)
+
     return render(
         request,
         "products/pages/products.html",
         context={
-            "products": products,
+            "products": page_obj,
             "no_recipes_message": no_recipes_message,
+            "pagination_range": pagination_range,
         },
     )
 
