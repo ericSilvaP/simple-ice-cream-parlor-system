@@ -165,6 +165,8 @@ def login_user_view(request):
             "form": form,
             "form_action": form_action,
             "submit_button_text": "Entrar",
+            "show_register": True,
+            "login_title_text": "Entrar",
         },
     )
 

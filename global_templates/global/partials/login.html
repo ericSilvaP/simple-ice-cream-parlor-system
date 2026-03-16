@@ -1,0 +1,14 @@
+<div class="register-container">
+  <h1 class="bold-title">{{ login_title_text }}</h1>
+  {% include 'global/partials/messages.html' %}
+  <div class="login-register-form-container">
+    {% include 'global/partials/form.html' %}
+    {% if show_register %}
+      <div class="container-center register-button-container">
+        <a href="{% url 'products:register_user' %}">
+          <button class="alt-btt">Cadastrar</button>
+        </a>
+      </div>
+    {% endif %}
+  </div>
+</div>
