@@ -1,0 +1,35 @@
+<aside id="sidebar">
+  <div id="sidebar-logout">
+    <form action="{% url 'products:logout' %}" method="POST">
+      {% csrf_token %}
+      <button type="submit" class="no-style-button sidebar-logout-button">Sair</button>
+    </form>
+  </div>
+  <nav id="sidebar-nav">
+    <ul id="sidebar-nav-list">
+      <li class="sidebar-nav-item sidebar-nav-group">
+        <span class="sidebar-group-title">Pedidos</span>
+        <ul class="sidebar-sub-list">
+          <li class="sidebar-nav-item">
+            <a href="{% url 'products_manager:orders_today' %}"
+               class="sidebar-link {% if request.resolver_match.url_name == 'orders_today' %}sidebar-link--active{% endif %}">
+              Hoje
+            </a>
+          </li>
+          <li class="sidebar-nav-item">
+            <a href="{% url 'products_manager:orders_all' %}"
+               class="sidebar-link {% if request.resolver_match.url_name == 'orders_all' %}sidebar-link--active{% endif %}">
+              Todos
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li class="sidebar-nav-item">
+        <a href="{% url 'products:products' %}"
+           class="sidebar-link {% if request.resolver_match.url_name == 'products' %}sidebar-link--active{% endif %}">
+          Produtos
+        </a>
+      </li>
+    </ul>
+  </nav>
+</aside>

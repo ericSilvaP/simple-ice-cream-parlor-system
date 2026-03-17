@@ -10,9 +10,12 @@
     </title>
   </head>
   <body>
-    {% comment %} {% include 'products/partials/header.html' %} {% endcomment %}
     <main>
+      {% if not hidden_sidebar %}
+        {% include 'products_manager/partials/sidebar.html' %}
+      {% endif %}
       {% block content %}
       {% endblock content %}
-    </body>
-  </html>
+    </main>
+  </body>
+</html>

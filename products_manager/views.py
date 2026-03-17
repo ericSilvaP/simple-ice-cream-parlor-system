@@ -11,5 +11,10 @@ def login(request):
             "form": form,
             "submit_button_text": "Entrar",
             "login_title_text": "Administração",
+            "hidden_sidebar": True,
         },
     )
+
+
+def dashboard_today(request):
+    return render(request, "products_manager/pages/orders_today.html")
