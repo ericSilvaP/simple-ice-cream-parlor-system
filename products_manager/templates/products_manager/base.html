@@ -10,12 +10,14 @@
     </title>
   </head>
   <body>
-    <main>
+    <div id="page-wrapper">
       {% if not hidden_sidebar %}
         {% include 'products_manager/partials/sidebar.html' %}
       {% endif %}
-      {% block content %}
-      {% endblock content %}
-    </main>
+      <main>
+        {% block content %}
+        {% endblock content %}
+      </main>
+    </div>
   </body>
 </html>
