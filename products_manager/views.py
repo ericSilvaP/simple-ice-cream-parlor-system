@@ -20,7 +20,7 @@ def login(request):
 
 def dashboard_today(request):
     today = timezone.localdate()
-    orders = Order.objects.filter(created_at__date=today)
+    orders = Order.objects.filter(created_at__date=today, status="pending")
     return render(
         request,
         "products_manager/pages/orders_today.html",
