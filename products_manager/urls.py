@@ -7,6 +7,6 @@ urlpatterns = [
     path("login/", views.login, name="login"),
     path("dashboard/hoje/", views.dashboard_today, name="orders_today"),
     path("dashboard/todos/", views.dashboard_today, name="orders_all"),
-    path("dashboard/todos/<int:pk>", views.dashboard_today, name="order_cancel"),
-    path("dashboard/todos/<int:pk>", views.dashboard_today, name="order_complete"),
+    path("dashboard/cancelar/<int:pk>/", views.dashboard_today, name="order_cancel"),
+    path("dashboard/completo/<int:pk>/", views.order_complete, name="order_complete"),
 ]

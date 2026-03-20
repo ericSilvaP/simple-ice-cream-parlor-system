@@ -1,7 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from products.forms import LoginUserForm
 from products.models import Order
 from django.utils import timezone
+from django.views.decorators.http import require_POST
 
 
 def login(request):
@@ -26,3 +27,11 @@ def dashboard_today(request):
         "products_manager/pages/orders_today.html",
         context={"pending_orders": orders},
     )
+
+
+@require_POST
+def order_complete(request, pk):
+    order = get_object_or_404(Order, pk=pk)
+    order.status = "complete"
+    order.save()
+    return redirect("products_manager:orders_today")
