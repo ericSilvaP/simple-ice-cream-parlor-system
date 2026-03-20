@@ -5,6 +5,7 @@
 {% block content %}
   <div class="orders-horizontal-container">
     <h2>Pedidos Pendentes</h2>
+    {% include 'global/partials/messages.html' %}
     <hr>
     <div class="orders-horizontal-cards-container">
       {% for order in pending_orders %}

@@ -3,6 +3,7 @@ from products.forms import LoginUserForm
 from products.models import Order
 from django.utils import timezone
 from django.views.decorators.http import require_POST
+from django.contrib import messages
 
 
 def login(request):
@@ -34,4 +35,14 @@ def order_complete(request, pk):
     order = get_object_or_404(Order, pk=pk)
     order.status = "complete"
     order.save()
+    messages.success(request, f"Pedido {order.pk} completo")
+    return redirect("products_manager:orders_today")
+
+
+@require_POST
+def order_cancel(request, pk):
+    order = get_object_or_404(Order, pk=pk)
+    order.status = "canceled"
+    order.save()
+    messages.error(request, f"Pedido {order.pk} cancelado")
     return redirect("products_manager:orders_today")
