@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from products.forms import LoginUserForm
+from products.models import Order
+from django.utils import timezone
 
 
 def login(request):
@@ -17,4 +19,10 @@ def login(request):
 
 
 def dashboard_today(request):
-    return render(request, "products_manager/pages/orders_today.html")
+    today = timezone.localdate()
+    orders = Order.objects.filter(created_at__date=today)
+    return render(
+        request,
+        "products_manager/pages/orders_today.html",
+        context={"pending_orders": orders},
+    )

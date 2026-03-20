@@ -3,5 +3,16 @@
   Administração |
 {% endblock title %}
 {% block content %}
-  Abacate
+  <div class="orders-horizontal-container">
+    <h2>Pedidos Pendentes</h2>
+    <hr>
+    <div class="orders-horizontal-cards-container">
+      {% for order in pending_orders %}
+        {% include 'products_manager/partials/pending_order_card.html' %}
+      {% empty %}
+        <p class="orders-empty-message">Nenhum pedido pendente.</p>
+      {% endfor %}
+    </div>
+    <hr>
+  </div>
 {% endblock content %}

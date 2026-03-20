@@ -1,0 +1,27 @@
+<div class="horizontal-order-card">
+  <div class="order-card-header">
+    <span class="order-card-name">{{ order.user.username }}</span>
+    <span class="order-card-id">ID - {{ order.id }}</span>
+  </div>
+  <span class="order-card-date">{{ order.created_at|date:"d/m/Y" }} às {{ order.created_at|time:"H:i" }}</span>
+  <p class="order-card-items">
+    {% for item in order.items.all %}
+      {{ item.quantity }}x {{ item.product.name }}
+      {% if not forloop.last %},{% endif %}
+    {% endfor %}
+  </p>
+  <span class="order-card-status order-card-status--pending">Pendente</span>
+  <span class="order-card-price">R$ {{ order.total_value }}</span>
+  <div class="order-card-actions">
+    <form action="{% url 'products_manager:order_complete' order.id %}"
+          method="POST">
+      {% csrf_token %}
+      <button type="submit" class="main-btt order-card-btt">Pronto</button>
+    </form>
+    <form action="{% url 'products_manager:order_cancel' order.id %}"
+          method="POST">
+      {% csrf_token %}
+      <button type="submit" class="alt-btt order-card-btt">Cancelar</button>
+    </form>
+  </div>
+</div>
