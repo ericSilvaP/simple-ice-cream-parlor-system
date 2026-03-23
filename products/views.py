@@ -197,7 +197,7 @@ def logout_view(request):
 
 @login_required(login_url="products:login_user")
 def orders_view(request):
-    orders = Order.objects.filter(user=request.user).annotate(
+    orders = Order.objects.filter(user=request.user, status="complete").annotate(
         items_number=Sum("items__quantity")
     )
 
