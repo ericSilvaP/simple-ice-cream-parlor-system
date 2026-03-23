@@ -5,6 +5,7 @@ from products.models import Category, Order, OrderItem, Product
 from django.http import HttpRequest, JsonResponse
 from django.views.decorators.http import require_POST
 
+from utils.filter import filter_products
 from utils.pagination import make_pagination_range
 from .forms import LoginUserForm, RegisterUserForm
 from django.contrib.auth import authenticate, login, logout
@@ -28,16 +29,10 @@ def show_products(request):
     ]
     no_recipes_message = ""
 
+    products, search_term = filter_products(products, search_term, min_value, max_value)
+
     if search_term:
-        products = products.filter(name__icontains=search_term)
         messages.info(request, f'Pesquisa para "{search_term}"')
-    if min_value < max_value:
-        if min_value:
-            products = products.filter(price__gte=min_value)
-        if max_value:
-            products = products.filter(price__lte=max_value)
-    if categories_filter:
-        products = products.filter(category__in=categories_filter)
 
     # PAGINATION
     try:

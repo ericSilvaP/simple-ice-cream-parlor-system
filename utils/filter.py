@@ -30,3 +30,23 @@ def filter_orders(
         orders = orders.filter(status__in=status_search_list)
 
     return orders, search_term
+
+
+def filter_products(
+    products, search_term, min_value=0, max_value=0, categories_filter_list=[]
+):
+    if search_term:
+        products = products.filter(name__icontains=search_term)
+
+    if not min_value and max_value:
+        products = products.filter(price__lte=max_value)
+    elif not max_value and min_value:
+        products = products.filter(price__gte=min_value)
+    if min_value and max_value:
+        if int(min_value) < int(max_value):
+            products = products.filter(price__gte=min_value, price__lte=max_value)
+
+    if categories_filter_list:
+        products = products.filter(category__in=categories_filter_list)
+
+    return products, search_term
