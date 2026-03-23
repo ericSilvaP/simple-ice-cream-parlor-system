@@ -47,6 +47,6 @@ def filter_products(
             products = products.filter(price__gte=min_value, price__lte=max_value)
 
     if categories_filter_list:
-        products = products.filter(category__in=categories_filter_list)
+        products = products.filter(category__name__in=categories_filter_list)
 
     return products, search_term

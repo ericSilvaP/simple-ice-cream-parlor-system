@@ -23,13 +23,19 @@ def show_products(request):
     min_value = request.GET.get("min_value")
     max_value = request.GET.get("max_value")
     categories_filter = [
-        categorie.pk
+        categorie
         for categorie in categories
         if request.GET.get(f"category_{categorie.name}") == "on"
     ]
     no_recipes_message = ""
 
-    products, search_term = filter_products(products, search_term, min_value, max_value)
+    products, search_term = filter_products(
+        products,
+        search_term,
+        min_value,
+        max_value,
+        categories_filter,
+    )
 
     if search_term:
         messages.info(request, f'Pesquisa para "{search_term}"')
