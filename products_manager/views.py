@@ -7,6 +7,7 @@ from django.contrib import messages
 from django.core.paginator import Paginator
 
 from utils.pagination import make_pagination_range
+from django.db.models import Q
 
 
 def login(request):
@@ -25,11 +26,17 @@ def login(request):
 
 def dashboard_today(request):
     today = timezone.localdate()
-    orders = Order.objects.filter(created_at__date=today, status="pending")
+    pending_orders = Order.objects.filter(created_at__date=today, status="pending")
+    other_orders = Order.objects.filter(
+        Q(created_at__date=today) & ~Q(status="pending")
+    )
     return render(
         request,
         "products_manager/pages/orders_today.html",
-        context={"pending_orders": orders},
+        context={
+            "pending_orders": pending_orders,
+            "other_orders": other_orders,
+        },
     )
 
 

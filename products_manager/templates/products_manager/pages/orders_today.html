@@ -11,7 +11,19 @@
       {% for order in pending_orders %}
         {% include 'products_manager/partials/pending_order_card.html' %}
       {% empty %}
-        <p class="orders-empty-message">Nenhum pedido pendente.</p>
+        <p class="orders-empty-message">Nenhum pedido.</p>
+      {% endfor %}
+    </div>
+    <hr>
+  </div>
+  <div class="orders-horizontal-container">
+    <h2>Outros pedidos</h2>
+    <hr>
+    <div class="orders-horizontal-cards-container">
+      {% for order in other_orders %}
+        {% include 'products_manager/partials/non-button-order-card.html' %}
+      {% empty %}
+        <p class="orders-empty-message">Nenhum pedido.</p>
       {% endfor %}
     </div>
     <hr>
