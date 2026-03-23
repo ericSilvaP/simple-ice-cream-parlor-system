@@ -17,16 +17,16 @@ def filter_orders(
                 total_value__gte=min_value, total_value__lte=max_value
             )
 
+    status_search_list = []
     for status in status_list:
-        status_search = ""
         if status == "Completo" and request.GET.get(status):
-            status_search = "complete"
+            status_search_list.append("complete")
         if status == "Cancelado" and request.GET.get(status):
-            status_search = "canceled"
+            status_search_list.append("canceled")
         if status == "Pendente" and request.GET.get(status):
-            status_search = "pending"
+            status_search_list.append("pending")
 
-        if status_search:
-            orders = orders.filter(status=status_search)
+    if status_search_list:
+        orders = orders.filter(status__in=status_search_list)
 
     return orders, search_term
