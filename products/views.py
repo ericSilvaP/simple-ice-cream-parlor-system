@@ -60,6 +60,7 @@ def show_products(request):
             "no_recipes_message": no_recipes_message,
             "pagination_range": pagination_range,
             "categories": categories,
+            "modal_path": "products/partials/filter-modal.html",
         },
     )
 

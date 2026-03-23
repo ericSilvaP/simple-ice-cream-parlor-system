@@ -1,4 +1,4 @@
-{% if products.has_other_pages %}
+{% if products.has_other_pages or page_obj.has_other_pages %}
   <div class="pagination">
     <div class="pagination-content">
       {% if pagination_range.first_page_out_of_range and pagination_range.total_pages > pagination_range.qty_pages %}
