@@ -6,6 +6,7 @@ from django.views.decorators.http import require_POST
 from django.contrib import messages
 from django.core.paginator import Paginator
 
+from utils.filter import filter_orders
 from utils.pagination import make_pagination_range
 from django.db.models import Q
 
@@ -46,35 +47,18 @@ def dashboard_all(request):
 
     # SEARCH AND FILTER
     search_term = request.GET.get("q", "")
-    min_value = request.GET.get("min_value")
-    max_value = request.GET.get("max_value")
+    min_value = request.GET.get("min_value", 0)
+    max_value = request.GET.get("max_value", 0)
     status_list = ["Completo", "Cancelado", "Pendente"]
 
+    orders, search_term = filter_orders(
+        request, orders, search_term, min_value, max_value, status_list
+    )
+
     if search_term:
-        if str(search_term).isdigit():
-            orders = orders.filter(pk__icontains=search_term)
-        else:
-            orders = orders.filter(user__username__icontains=search_term)
-
-        if orders:
-            messages.info(request, f'Pesquisa para "{search_term}"')
-        else:
-            orders = Order.objects.all()
-    if min_value:
-        orders = orders.filter(price__gte=min_value)
-    if max_value:
-        orders = orders.filter(price__lte=max_value)
-    for status in status_list:
-        status_search = ""
-        if status == "Completo" and request.GET.get(status):
-            status_search = "complete"
-        if status == "Cancelado" and request.GET.get(status):
-            status_search = "canceled"
-        if status == "Pendente" and request.GET.get(status):
-            status_search = "pending"
-
-        if status_search:
-            orders = orders.filter(status=status_search)
+        messages.info(request, f'Pesquisa para "{search_term}"')
+    elif not orders:
+        orders = Order.objects.all()
 
     # PAGINATION
     try:

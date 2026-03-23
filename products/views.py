@@ -31,10 +31,11 @@ def show_products(request):
     if search_term:
         products = products.filter(name__icontains=search_term)
         messages.info(request, f'Pesquisa para "{search_term}"')
-    if min_value:
-        products = products.filter(price__gte=min_value)
-    if max_value:
-        products = products.filter(price__lte=max_value)
+    if min_value < max_value:
+        if min_value:
+            products = products.filter(price__gte=min_value)
+        if max_value:
+            products = products.filter(price__lte=max_value)
     if categories_filter:
         products = products.filter(category__in=categories_filter)
 
