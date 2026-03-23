@@ -60,9 +60,17 @@ main {
   flex: 1;
   padding: var(--spacing-gutter-light);
 }
+
 #sidebar-logout {
   display: flex;
   justify-content: flex-start;
+}
+
+#container-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .sidebar-logout-button {
@@ -203,6 +211,16 @@ main {
 .order-card-status--pending {
   background-color: rgba(242, 205, 136, 0.562);
   color: var(--color-04);
+}
+
+.order-card-status--complete {
+  background-color: #c2f0cb;
+  color: var(--color-success);
+}
+
+.order-card-status--canceled {
+  background-color: #f5c6c6;
+  color: var(--color-error);
 }
 
 .order-card-price {

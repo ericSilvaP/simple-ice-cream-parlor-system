@@ -1,0 +1,20 @@
+{% extends "products_manager/base.html" %}
+{% block title %}
+  Administração |
+{% endblock title %}
+{% block content %}
+  <div class="orders-horizontal-container">
+    <div id="container-header">
+      <h2>Todos os Pedidos</h2>
+      {% include 'global/partials/search-bar.html' %}
+    </div>
+    {% include 'global/partials/messages.html' %}
+    <div class="orders-horizontal-cards-container">
+      {% for order in pending_orders %}
+        {% include 'products_manager/partials/non-button-order-card.html' %}
+      {% empty %}
+        <p class="orders-empty-message">Nenhum pedido pendente.</p>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock content %}

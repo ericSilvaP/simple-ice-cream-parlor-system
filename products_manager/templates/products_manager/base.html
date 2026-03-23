@@ -17,7 +17,9 @@
       <main>
         {% block content %}
         {% endblock content %}
+        {% include 'global/partials/pagination.html' %}
       </main>
     </div>
   </body>
+  <script src="{% static 'global/scripts/modal.js' %}"></script>
 </html>

@@ -1,0 +1,35 @@
+{% comment %} precisa estar dentro de um formulário de pesquisa {% endcomment %}
+<div class="modal hidden" id="filter-modal">
+  <div class="filter-modal-container">
+    <h3 class="center">Escolha os filtros</h3>
+    <div class="price-filter">
+      <label for="filter-min-value">Valor Mínimo</label>
+      <input name="min_value"
+             id="filter-min-value"
+             type="number"
+             class="min-price-input"
+             min="0"
+             placeholder="10">
+      <label for="filter-max-value">Valor Máximo</label>
+      <input name="max_value"
+             id="filter-max-value"
+             type="number"
+             class="min-price-input"
+             placeholder="100">
+    </div>
+    <div class="category-filter">
+      <strong>Status</strong>
+      <div class="categories-filter">
+        {% for status in status_list %}
+          <div class="categorie-opt">
+            <input type="checkbox" name="{{ status }}" id="{{ status }}">
+            <label for="{{ status }}">{{ status }}</label>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="filter-ok-button-container">
+      <span class="filter-ok-button orange-button filter-button-toggle">OK</span>
+    </div>
+  </div>
+</div>

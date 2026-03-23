@@ -1,0 +1,25 @@
+<div class="horizontal-order-card">
+  <div class="order-card-header">
+    <span class="order-card-name">{{ order.user.username }}</span>
+    <span class="order-card-id">ID - {{ order.id }}</span>
+  </div>
+  <span class="order-card-date">{{ order.created_at|date:"d/m/Y" }} às {{ order.created_at|time:"H:i" }}</span>
+  <p class="order-card-items">
+    {% for item in order.items.all %}
+      {{ item.quantity }}x {{ item.product.name }}
+      {% if not forloop.last %},{% endif %}
+    {% endfor %}
+  </p>
+  <span class="order-card-status order-card-status--{{ order.status }}">
+    {% if order.status == "complete" %}
+      Pronto
+    {% elif order.status == "canceled" %}
+      Cancelado
+    {% elif order.status == "pending" %}
+      Pendente
+    {% else %}
+      Indefinido
+    {% endif %}
+  </span>
+  <span class="order-card-price">R$ {{ order.total_value }}</span>
+</div>
