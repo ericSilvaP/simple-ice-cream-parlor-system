@@ -10,6 +10,8 @@ from utils.filter import filter_orders
 from utils.pagination import make_pagination_range
 from django.db.models import Q
 
+from utils.pagination_url import create_orders_pagination_url
+
 
 def login(request):
     form = LoginUserForm()
@@ -51,6 +53,15 @@ def dashboard_all(request):
     max_value = request.GET.get("max_value", 0)
     status_list = ["Completo", "Cancelado", "Pendente"]
 
+    status_search_list = []
+    for status in status_list:
+        if status == "Completo" and request.GET.get(status):
+            status_search_list.append(status)
+        if status == "Cancelado" and request.GET.get(status):
+            status_search_list.append(status)
+        if status == "Pendente" and request.GET.get(status):
+            status_search_list.append(status)
+
     orders, search_term = filter_orders(
         request, orders, search_term, min_value, max_value, status_list
     )
@@ -70,7 +81,9 @@ def dashboard_all(request):
     page_obj = paginator.get_page(current_page)
 
     pagination_range = make_pagination_range(paginator.page_range, 5, current_page)
-
+    pagination_url = create_orders_pagination_url(
+        search_term, min_value, max_value, status_search_list
+    )
     return render(
         request,
         "products_manager/pages/orders_all.html",
@@ -81,6 +94,7 @@ def dashboard_all(request):
             "modal_path": "products_manager/partials/filter-modal.html",
             "status_list": status_list,
             "pagination_range": pagination_range,
+            "pagination_url": pagination_url,
         },
     )
 

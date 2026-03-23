@@ -7,6 +7,7 @@ from django.views.decorators.http import require_POST
 
 from utils.filter import filter_products
 from utils.pagination import make_pagination_range
+from utils.pagination_url import create_products_pagination_url
 from .forms import LoginUserForm, RegisterUserForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -40,6 +41,13 @@ def show_products(request):
     if search_term:
         messages.info(request, f'Pesquisa para "{search_term}"')
 
+    pagination_url = create_products_pagination_url(
+        search_term,
+        min_value,
+        max_value,
+        [category.name for category in categories_filter],
+    )
+
     # PAGINATION
     try:
         current_page = int(request.GET.get("page", 1))
@@ -63,6 +71,7 @@ def show_products(request):
             "pagination_range": pagination_range,
             "categories": categories,
             "modal_path": "products/partials/filter-modal.html",
+            "pagination_url": pagination_url,
         },
     )
 

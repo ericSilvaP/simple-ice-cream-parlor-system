@@ -2,17 +2,17 @@
   <div class="pagination">
     <div class="pagination-content">
       {% if pagination_range.first_page_out_of_range and pagination_range.total_pages > pagination_range.qty_pages %}
-        <a class="page-link page-item" href="?page=1">1</a>
+        <a class="page-link page-item" href="?page=1{{ pagination_url }}">1</a>
         <span class="page-item">...</span>
       {% endif %}
       {% for page in pagination_range.pagination %}
         <a class="page-link page-item {% if page == pagination_range.current_page %}actual-page{% endif %}"
-           href="?page={{ page }}&q={{ request.GET.q }}&min_value={{ request.GET.min_value }}&max_value={{ request.GET.max_value }}">{{ page }}</a>
+           href="?page={{ page }}{{ pagination_url }}">{{ page }}</a>
       {% endfor %}
       {% if pagination_range.last_page_out_of_range %}
         <span class="page-item">...</span>
         <a class="page-link page-item"
-           href="?page={{ pagination_range.total_pages }}">{{ pagination_range.total_pages }}</a>
+           href="?page={{ pagination_range.total_pages }}{{ pagination_url }}">{{ pagination_range.total_pages }}</a>
       {% endif %}
     </div>
   </div>
