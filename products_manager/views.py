@@ -1,16 +1,19 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from products.forms import LoginUserForm
-from products.models import Category, Order
+from products.models import Category, Order, Product
 from django.utils import timezone
 from django.views.decorators.http import require_POST
 from django.contrib import messages
 from django.core.paginator import Paginator
 
-from utils.filter import filter_orders
+from utils.filter import filter_orders, filter_products
 from utils.pagination import make_pagination_range
 from django.db.models import Q
 
-from utils.pagination_url import create_orders_pagination_url
+from utils.pagination_url import (
+    create_orders_pagination_url,
+    create_products_pagination_url,
+)
 
 
 def login(request):
@@ -116,3 +119,58 @@ def order_cancel(request, pk):
     order.save()
     messages.error(request, f"Pedido {order.pk} cancelado")
     return redirect("products_manager:orders_today")
+
+
+def list_products(request):
+    products = Product.objects.all()
+    categories = Category.objects.all()
+
+    # SEARCH AND FILTER
+    search_term = request.GET.get("q", "")
+    min_value = request.GET.get("min_value", 0)
+    max_value = request.GET.get("max_value", 0)
+    categories_filter = [
+        categorie
+        for categorie in categories
+        if request.GET.get(f"category_{categorie.name}") == "on"
+    ]
+
+    products, search_term = filter_products(
+        products, search_term, min_value, max_value, categories_filter
+    )
+
+    if search_term:
+        messages.info(request, f'Pesquisa para "{search_term}"')
+    elif not products:
+        messages.error(request, "Nenhum produto encontrado")
+        products = Product.objects.all()
+
+    # PAGINATION
+    try:
+        current_page = int(request.GET.get("page", 1))
+    except ValueError:
+        current_page = 1
+
+    paginator = Paginator(products, 30)
+    page_obj = paginator.get_page(current_page)
+
+    pagination_range = make_pagination_range(paginator.page_range, 5, current_page)
+
+    pagination_url = create_products_pagination_url(
+        search_term,
+        min_value,
+        max_value,
+        [category.name for category in categories_filter],
+    )
+    return render(
+        request,
+        "products_manager/pages/list-products.html",
+        context={
+            "page_obj": page_obj,
+            "categories": categories,
+            "hidden_add_to_cart_button": True,
+            "pagination_range": pagination_range,
+            "modal_path": "products/partials/filter-modal.html",
+            "pagination_url": pagination_url,
+        },
+    )

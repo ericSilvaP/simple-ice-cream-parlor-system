@@ -25,10 +25,21 @@
         </ul>
       </li>
       <li class="sidebar-nav-item">
-        <a href="{% url 'products:products' %}"
-           class="sidebar-link {% if request.resolver_match.url_name == 'products' %}sidebar-link--active{% endif %}">
-          Produtos
-        </a>
+        <span class="sidebar-link">Produtos</span>
+        <ul class="sidebar-sub-list">
+          <li class="sidebar-nav-item">
+            <a href="{% url 'products_manager:list_products' %}"
+               class="sidebar-link {% if request.resolver_match.url_name == 'list_products' %}sidebar-link--active{% endif %}">
+              Ver
+            </a>
+          </li>
+          <li class="sidebar-nav-item">
+            <a href="{% url 'products_manager:orders_all' %}"
+               class="sidebar-link {% if request.resolver_match.url_name == 'orders_all' %}sidebar-link--active{% endif %}">
+              Criar
+            </a>
+          </li>
+        </ul>
       </li>
     </ul>
   </nav>

@@ -11,12 +11,14 @@
   <div class="prod-info">
     <div class="lay-1">
       <div class="prod-name">{{ product.name }}</div>
-      <div class="add-to-cart-button-container">
-        <form action="{% url 'products:add_to_cart' product.id %}" method="POST">
-          {% csrf_token %}
-          <button type="submit" class="add-to-cart-button">+</button>
-        </form>
-      </div>
+      {% if not hidden_add_to_cart_button %}
+        <div class="add-to-cart-button-container">
+          <form action="{% url 'products:add_to_cart' product.id %}" method="POST">
+            {% csrf_token %}
+            <button type="submit" class="add-to-cart-button">+</button>
+          </form>
+        </div>
+      {% endif %}
     </div>
     <hr>
     <div class="lay-2">

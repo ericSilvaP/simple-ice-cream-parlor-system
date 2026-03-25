@@ -162,14 +162,6 @@ header li:hover {
   font-size: 1.5rem;
 }
 
-.cards-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
-  gap: var(--spacing-gutter-light);
-  justify-items: center;
-  padding: 0 3rem;
-}
-
 .product-card-container {
   background-color: var(--color-03);
   border-radius: 1rem;

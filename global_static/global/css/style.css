@@ -58,7 +58,20 @@ input:-webkit-autofill:active {
   -webkit-text-fill-color: #000 !important;
 }
 
+a {
+  text-decoration: none;
+  color: var(--color-dark-text);
+}
+
 /* GENERAL */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+  gap: var(--spacing-gutter-light);
+  justify-items: center;
+  padding: 0 3rem;
+}
+
 .center {
   margin: auto;
   text-align: center;

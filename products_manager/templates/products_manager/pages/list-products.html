@@ -1,0 +1,23 @@
+{% extends "products_manager/base.html" %}
+{% block title %}
+  Administração |
+{% endblock title %}
+{% block content %}
+  <div class="orders-horizontal-container">
+    <div id="container-header">
+      <h2>Produtos</h2>
+      {% include 'global/partials/search-bar.html' %}
+    </div>
+    {% include 'global/partials/messages.html' %}
+    <div class="orders-horizontal-cards-container cards-grid">
+      {% for product in page_obj %}
+        <a class="adm-product-container"
+           href="{% url 'products_manager:edit_product' product.pk %}">
+          {% include 'products/partials/product-card.html' %}
+        </a>
+      {% empty %}
+        <p class="orders-empty-message">Nenhum produto.</p>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock content %}

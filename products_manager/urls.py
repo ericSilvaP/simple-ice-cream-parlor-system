@@ -9,4 +9,6 @@ urlpatterns = [
     path("dashboard/todos/", views.dashboard_all, name="orders_all"),
     path("dashboard/cancelar/<int:pk>/", views.order_cancel, name="order_cancel"),
     path("dashboard/completo/<int:pk>/", views.order_complete, name="order_complete"),
+    path("produtos/ver/", views.list_products, name="list_products"),
+    path("produtos/editar/<int:pk>/", views.order_complete, name="edit_product"),
 ]
