@@ -1,3 +1,6 @@
+from django.db.models import Q
+
+
 def filter_orders(
     request, orders, search_term, min_value=0, max_value=0, status_list=[]
 ):
@@ -5,7 +8,10 @@ def filter_orders(
         if str(search_term).isdigit():
             orders = orders.filter(pk__icontains=search_term)
         else:
-            orders = orders.filter(user__username__icontains=search_term)
+            orders = orders.filter(
+                Q(user__username__icontains=search_term)
+                | Q(items__product__name__icontains=search_term)
+            )
 
     if not min_value and max_value:
         orders = orders.filter(total_value__lte=max_value)
