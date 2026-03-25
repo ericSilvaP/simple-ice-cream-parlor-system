@@ -8,10 +8,14 @@
     <div class="search-field-container">
       <input type="search" name="q" id="product-search" placeholder="Pesquise">
     </div>
-    <div class="filter-button-container filter-button-toggle"
-         id="filter-button-container">
-      <i class="fa-solid fa-filter"></i>
-    </div>
-    {% include modal_path %}
+    {% if modal_path %}
+      <div class="filter-button-container filter-button-toggle"
+           id="filter-button-container">
+        <i class="fa-solid fa-filter"></i>
+      </div>
+    {% endif %}
+    {% if modal_path %}
+      {% include modal_path %}
+    {% endif %}
   </form>
 </div>
