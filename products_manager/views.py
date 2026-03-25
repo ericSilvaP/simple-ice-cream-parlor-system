@@ -69,6 +69,7 @@ def dashboard_all(request):
     if search_term:
         messages.info(request, f'Pesquisa para "{search_term}"')
     elif not orders:
+        messages.error(request, "Nenhuma receita encontrada")
         orders = Order.objects.all()
 
     # PAGINATION
