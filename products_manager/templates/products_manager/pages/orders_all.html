@@ -10,10 +10,10 @@
     </div>
     {% include 'global/partials/messages.html' %}
     <div class="orders-horizontal-cards-container">
-      {% for order in pending_orders %}
+      {% for order in all_orders %}
         {% include 'products_manager/partials/non-button-order-card.html' %}
       {% empty %}
-        <p class="orders-empty-message">Nenhum pedido pendente.</p>
+        <p class="orders-empty-message">Nenhum pedido.</p>
       {% endfor %}
     </div>
   </div>

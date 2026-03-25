@@ -89,7 +89,7 @@ def dashboard_all(request):
         request,
         "products_manager/pages/orders_all.html",
         context={
-            "pending_orders": page_obj,
+            "all_orders": page_obj,
             "page_obj": page_obj,
             "categories": categories,
             "modal_path": "products_manager/partials/filter-modal.html",
