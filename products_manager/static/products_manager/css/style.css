@@ -275,9 +275,11 @@ main {
   background-color: white;
   padding: var(--spacing-gutter-light) var(--spacing-gutter-large);
   display: flex;
-  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   min-width: 60rem;
   border: 1px solid var(--color-02);
+  gap: var(--spacing-gutter-light);
 }
 
 /* Nome ocupa as duas colunas */
