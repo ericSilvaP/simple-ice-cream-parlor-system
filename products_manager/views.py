@@ -6,6 +6,7 @@ from django.views.decorators.http import require_POST
 from django.contrib import messages
 from django.core.paginator import Paginator
 
+from products_manager.forms import ProductForm
 from utils.filter import filter_orders, filter_products
 from utils.pagination import make_pagination_range
 from django.db.models import Q
@@ -172,5 +173,17 @@ def list_products(request):
             "pagination_range": pagination_range,
             "modal_path": "products/partials/filter-modal.html",
             "pagination_url": pagination_url,
+        },
+    )
+
+
+def edit_product(request, pk):
+    form = ProductForm()
+    return render(
+        request,
+        "products_manager/pages/edit-product.html",
+        context={
+            "form": form,
+            "product_id": pk,
         },
     )
