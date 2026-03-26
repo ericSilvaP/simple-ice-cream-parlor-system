@@ -1,19 +1,21 @@
 <div class="main-user-form">
   <form action="{{ form_action }}" method="POST">
     {% csrf_token %}
-    {% for field in form %}
-      <div class="form-group">
-        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-        {{ field }}
-        {{ field.errors }}
-      </div>
-    {% endfor %}
-    {% if form.non_field_errors %}
-      <div class="form-errors center">
-        <div>ERRO</div>
-        {{ form.non_field_errors }}
-      </div>
-    {% endif %}
+    <div class="form-content-grid">
+      {% for field in form %}
+        <div class="form-group {{ field.field.widget.attrs.class }}">
+          <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+          {{ field }}
+          {{ field.errors }}
+        </div>
+      {% endfor %}
+      {% if form.non_field_errors %}
+        <div class="form-errors center">
+          <div>ERRO</div>
+          {{ form.non_field_errors }}
+        </div>
+      {% endif %}
+    </div>
     <div class="form-submit-btt-container container-center">
       <button class="main-btt">{{ submit_button_text|default:"Enviar" }}</button>
     </div>
