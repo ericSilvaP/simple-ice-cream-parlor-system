@@ -6,7 +6,7 @@ function getTagValue(element) {
   return Number([integers, cents].join('.'))
 }
 
-function getCSRFToken() {
+export function getCSRFToken() {
   return document.cookie
     .split('; ')
     .find((row) => row.startsWith('csrftoken='))

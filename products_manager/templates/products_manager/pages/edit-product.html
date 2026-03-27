@@ -10,7 +10,9 @@
     <div id="product-form-container">
       {% include 'global/partials/form.html' %}
       <form action="{% url 'products_manager:delete_product' product_id %}"
+            method="POST"
             id="exclude-product-form">
+        {% csrf_token %}
         <button type="submit" class="alt-btt">Excluir</button>
       </form>
     </div>

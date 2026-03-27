@@ -244,3 +244,11 @@ def create_product_save(request):
         return redirect("products_manager:create_product")
 
     return redirect("products_manager:edit_product", pk=new_product.pk)
+
+
+@require_POST
+def delete_product(request, pk):
+    product = get_object_or_404(Product, pk=pk)
+    messages.success(request, f"Produto '{product.name}' excluído com sucesso")
+    product.delete()
+    return redirect("products_manager:list_products")
