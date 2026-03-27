@@ -6,6 +6,7 @@
   <div class="orders-horizontal-container"
        id="products-form-page-container-container">
     <h2>Editar Produto</h2>
+    {% include 'global/partials/messages.html' %}
     <div id="product-form-container">
       {% include 'global/partials/form.html' %}
       <form action="{% url 'products_manager:delete_product' product_id %}"

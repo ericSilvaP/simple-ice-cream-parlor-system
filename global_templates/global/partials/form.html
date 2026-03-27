@@ -1,5 +1,7 @@
 <div class="main-user-form">
-  <form action="{{ form_action }}" method="POST">
+  <form action="{{ form_action }}"
+        method="POST"
+        enctype="multipart/form-data">
     {% csrf_token %}
     <div class="form-content-grid">
       {% for field in form %}

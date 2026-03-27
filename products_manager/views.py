@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.urls import reverse
 from products.forms import LoginUserForm
 from products.models import Category, Order, Product
 from django.utils import timezone
@@ -178,12 +179,30 @@ def list_products(request):
 
 
 def edit_product(request, pk):
-    form = ProductForm()
+    product = get_object_or_404(Product, pk=pk)
+    form = ProductForm(instance=product)
     return render(
         request,
         "products_manager/pages/edit-product.html",
         context={
             "form": form,
             "product_id": pk,
+            "submit_button_text": "Salvar",
+            "form_action": reverse("products_manager:save_product", kwargs={"pk": pk}),
         },
     )
+
+
+@require_POST
+def save_product(request, pk):
+    product = get_object_or_404(Product, pk=pk)
+    form = ProductForm(
+        request.POST or None,
+        files=request.FILES or None,
+        instance=product,
+    )
+    if form.is_valid():
+        form.save()
+        messages.success(request, "Produto editado com sucesso")
+
+    return redirect("products_manager:edit_product", pk=pk)
