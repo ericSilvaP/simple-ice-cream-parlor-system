@@ -34,7 +34,7 @@ def login(request):
 
 def dashboard_today(request):
     today = timezone.localdate()
-    pending_orders = Order.objects.filter(created_at__date=today, status="pending")
+    pending_orders = Order.objects.filter(status="pending")
     other_orders = Order.objects.filter(
         Q(created_at__date=today) & ~Q(status="pending")
     )
