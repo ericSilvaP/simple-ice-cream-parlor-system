@@ -182,6 +182,10 @@ def edit_product(request, pk):
     POST = request.session.get("product_form_data", "")
     product = get_object_or_404(Product, pk=pk)
     form = ProductForm(POST or None, instance=product)
+
+    if POST:
+        del request.session["product_form_data"]
+
     return render(
         request,
         "products_manager/pages/edit-product.html",
