@@ -1,0 +1,12 @@
+{% extends "products_manager/base.html" %}
+{% block title %}
+  Administração |
+{% endblock title %}
+{% block content %}
+  <div class="orders-horizontal-container"
+       id="products-form-page-container-container">
+    <h2>Criar Produto</h2>
+    {% include 'global/partials/messages.html' %}
+    <div id="product-form-container">{% include 'global/partials/form.html' %}</div>
+  </div>
+{% endblock content %}

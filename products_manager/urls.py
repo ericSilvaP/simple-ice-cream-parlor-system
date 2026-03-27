@@ -11,6 +11,10 @@ urlpatterns = [
     path("dashboard/completo/<int:pk>/", views.order_complete, name="order_complete"),
     path("produtos/ver/", views.list_products, name="list_products"),
     path("produtos/editar/<int:pk>/", views.edit_product, name="edit_product"),
+    path("produtos/criar/", views.create_product, name="create_product"),
+    path(
+        "produtos/criar/salvar/", views.create_product_save, name="create_product_save"
+    ),
     path("produtos/excluir/<int:pk>/", views.edit_product, name="delete_product"),
     path("produtos/salvar/<int:pk>/", views.save_product, name="save_product"),
 ]

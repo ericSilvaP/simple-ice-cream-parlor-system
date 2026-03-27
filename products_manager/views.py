@@ -206,3 +206,29 @@ def save_product(request, pk):
         messages.success(request, "Produto editado com sucesso")
 
     return redirect("products_manager:edit_product", pk=pk)
+
+
+def create_product(request):
+    form = ProductForm()
+    return render(
+        request,
+        "products_manager/pages/create-product.html",
+        context={
+            "form": form,
+            "submit_button_text": "Salvar",
+            "form_action": reverse("products_manager:create_product_save"),
+        },
+    )
+
+
+@require_POST
+def create_product_save(request):
+    form = ProductForm(
+        request.POST or None,
+        files=request.FILES or None,
+    )
+    if form.is_valid():
+        new_product = form.save()
+        messages.success(request, "Produto criado com sucesso")
+
+    return redirect("products_manager:edit_product", pk=new_product.pk)
