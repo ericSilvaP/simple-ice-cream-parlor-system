@@ -5,11 +5,16 @@
     {% csrf_token %}
     <div class="form-content-grid">
       {% for field in form %}
-        <div class="form-group {{ field.field.widget.attrs.class }}">
+        <div class="form-group {{ field.field.widget.attrs.class }} {% if field.name == 'cover' %}cover{% endif %} ">
           <label for="{{ field.id_for_label }}">{{ field.label }}</label>
           {{ field }}
           {{ field.errors }}
         </div>
+        {% if field.name == 'cover' and field.value.url %}
+          <div>
+            <img src="{{ field.value.url }}" alt="">
+          </div>
+        {% endif %}
       {% endfor %}
       {% if form.non_field_errors %}
         <div class="form-errors center">

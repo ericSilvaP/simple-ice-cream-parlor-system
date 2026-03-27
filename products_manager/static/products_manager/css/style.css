@@ -307,3 +307,25 @@ main {
   padding: 0.4rem;
   cursor: pointer;
 }
+
+/* Cover field style */
+.cover {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: fit-content;
+  gap: 0.5rem 1rem;
+}
+
+.cover label[for='id_cover'] {
+  grid-column: span 2;
+}
+
+.cover a {
+  margin-left: 1rem;
+}
+
+.cover input[type='checkbox'] {
+  height: 2rem !important;
+  width: 2rem !important;
+  justify-self: end;
+}
