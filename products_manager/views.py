@@ -179,8 +179,9 @@ def list_products(request):
 
 
 def edit_product(request, pk):
+    POST = request.session.get("product_form_data", "")
     product = get_object_or_404(Product, pk=pk)
-    form = ProductForm(instance=product)
+    form = ProductForm(POST or None, instance=product)
     return render(
         request,
         "products_manager/pages/edit-product.html",
@@ -201,15 +202,18 @@ def save_product(request, pk):
         files=request.FILES or None,
         instance=product,
     )
+    request.session["product_form_data"] = request.POST
     if form.is_valid():
         form.save()
         messages.success(request, "Produto editado com sucesso")
+        del request.session["product_form_data"]
 
     return redirect("products_manager:edit_product", pk=pk)
 
 
 def create_product(request):
-    form = ProductForm()
+    POST = request.session.get("product_form_data", "")
+    form = ProductForm(POST or None)
     return render(
         request,
         "products_manager/pages/create-product.html",
@@ -227,8 +231,12 @@ def create_product_save(request):
         request.POST or None,
         files=request.FILES or None,
     )
+    request.session["product_form_data"] = request.POST
     if form.is_valid():
         new_product = form.save()
         messages.success(request, "Produto criado com sucesso")
+        del request.session["product_form_data"]
+    else:
+        return redirect("products_manager:create_product")
 
     return redirect("products_manager:edit_product", pk=new_product.pk)

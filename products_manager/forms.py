@@ -14,10 +14,6 @@ class ProductForm(forms.ModelForm):
             "category": "Categoria",
         }
 
-    # quantity = forms.FloatField(
-    #     label="Quantidade",
-    #     widget=forms.NumberInput(attrs={"min": 0, "step": 1}),
-    # )
     quantity_unit = forms.ChoiceField(
         label="Unidade",
         choices=(
@@ -31,3 +27,32 @@ class ProductForm(forms.ModelForm):
         label="Categoria",
         empty_label="Selecione uma categoria",
     )
+
+    def clean_name(self):
+        product_name = self.cleaned_data.get("name", "")
+        if len(product_name) < 5:
+            raise forms.ValidationError("Nome deve ter mais que 5 caracteres")
+        return product_name
+
+    def clean_price(self):
+        price = self.cleaned_data.get("price", "")
+        try:
+            if int(price) <= 0:
+                raise forms.ValidationError("Preço deve ser maior que zero")
+        except ValueError:
+            raise forms.ValidationError("Preço deve ser um valor numérico")
+
+        return price
+
+    def clean_quantity(self):
+        quantity = self.cleaned_data.get("quantity", "")
+        try:
+            if int(quantity) <= 0:
+                raise forms.ValidationError("Quantidade deve ser maior que zero")
+        except ValueError:
+            raise forms.ValidationError("Quantidade deve ser um valor numérico")
+
+        return quantity
+
+    def clean(self):
+        return super().clean()
