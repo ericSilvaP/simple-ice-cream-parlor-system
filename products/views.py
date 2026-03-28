@@ -13,6 +13,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.db.models import Sum
 from django.core.paginator import Paginator
+import re
 
 
 def show_products(request):
@@ -113,10 +114,15 @@ def remove_from_cart(request, id):
 @login_required(login_url="products:login_user")
 def create_order(request: HttpRequest):
     quantities = {
-        x[-1]: int(y) for x, y in request.POST.items() if x.startswith("quantity")
+        re.search(r"\d*$", x).group(): int(y)
+        for x, y in request.POST.items()
+        if x.startswith("quantity")
     }
-    del request.session["cart"]
-    products = [Product.objects.get(id=id) for id in quantities.keys()]
+
+    if request.session.get("cart"):
+        del request.session["cart"]
+
+    products = [get_object_or_404(Product, pk=pk) for pk in quantities.keys()]
     total_value = sum(
         [
             float(product.price) * quantities.get(str(product.pk), 1)
@@ -212,5 +218,5 @@ def orders_view(request):
     orders = Order.objects.filter(user=request.user, status="complete").annotate(
         items_number=Sum("items__quantity")
     )
-
+    x = orders[0].created_at
     return render(request, "products/pages/orders.html", context={"orders": orders})
