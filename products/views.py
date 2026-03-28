@@ -119,6 +119,10 @@ def create_order(request: HttpRequest):
         if x.startswith("quantity")
     }
 
+    if not quantities:
+        messages.error(request, "ERRO: nenhum produto no carrinho")
+        return redirect("products:cart")
+
     if request.session.get("cart"):
         del request.session["cart"]
 
@@ -215,8 +219,7 @@ def logout_view(request):
 
 @login_required(login_url="products:login_user")
 def orders_view(request):
-    orders = Order.objects.filter(user=request.user, status="complete").annotate(
+    orders = Order.objects.filter(user=request.user).annotate(
         items_number=Sum("items__quantity")
     )
-    x = orders[0].created_at
     return render(request, "products/pages/orders.html", context={"orders": orders})
