@@ -47,8 +47,7 @@ document.querySelectorAll('.minus-product-button').forEach((button) => {
     const product = button.closest('.cart-product')
     const quantitySpan = product.querySelector('.quantity')
     const quantityInput = product.querySelector('.quantity-input')
-    const productId = product.id[product.id.length - 1]
-
+    const productId = product.id.match(/\d+/)
     const current = Number(quantitySpan.textContent)
     if (current > 1) {
       const qnt = current - 1
