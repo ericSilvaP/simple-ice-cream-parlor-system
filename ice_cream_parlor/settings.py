@@ -54,6 +54,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "products_manager.middleware.SuperuserRequiredMiddleware",
 ]
 
 ROOT_URLCONF = "ice_cream_parlor.urls"
