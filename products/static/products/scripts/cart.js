@@ -26,7 +26,10 @@ function calculateSubtotal() {
     return sum + price * quantity
   }, 0)
 
-  subtotalDiv.textContent = total.toLocaleString('pt-BR')
+  subtotalDiv.textContent = total.toLocaleString('pt-BR', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  })
 }
 
 document.querySelectorAll('.plus-product-button').forEach((button) => {
