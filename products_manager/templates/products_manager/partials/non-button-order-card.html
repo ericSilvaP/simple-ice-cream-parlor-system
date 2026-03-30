@@ -11,15 +11,7 @@
     {% endfor %}
   </p>
   <span class="order-card-status order-card-status--{{ order.status }}">
-    {% if order.status == "complete" %}
-      Pronto
-    {% elif order.status == "canceled" %}
-      Cancelado
-    {% elif order.status == "pending" %}
-      Pendente
-    {% else %}
-      Indefinido
-    {% endif %}
+    {% include 'products/partials/order-status.html' %}
   </span>
   <span class="order-card-price">R$ {{ order.total_value }}</span>
 </div>

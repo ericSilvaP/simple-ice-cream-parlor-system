@@ -1,0 +1,9 @@
+{% if order.status == "complete" %}
+  Pronto
+{% elif order.status == "canceled" %}
+  Cancelado
+{% elif order.status == "pending" %}
+  Pendente
+{% else %}
+  Indefinido
+{% endif %}

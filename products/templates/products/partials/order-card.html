@@ -5,7 +5,7 @@
   </div>
   <div class="order-body">
     <div class="order-body-header">
-      <span>Entregue</span>
+      <span>{% include 'products/partials/order-status.html' %}</span>
       <span>Quantidade Total: {{ order.items_number }}</span>
     </div>
     <hr>
