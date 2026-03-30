@@ -45,7 +45,7 @@
   </header>
   <ul id="lateral-menu" class="display-none">
     <li class="nav-items">
-      <a href=""
+      <a href="{% url 'products:products' %}"
          class="nav-link {% if request.resolver_match.url_name == 'products' %}selected{% endif %}">produtos</a>
     </li>
     {% if user.is_authenticated %}
