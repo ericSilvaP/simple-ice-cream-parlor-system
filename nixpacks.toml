@@ -1,3 +1,6 @@
+[start]
+cmd = "gunicorn ice_cream_parlor.wsgi:application --bind 0.0.0.0:$PORT"
+
 [project]
 name = "simple-ice-cream-parlor"
 version = "0.1.0"
