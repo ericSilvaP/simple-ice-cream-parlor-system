@@ -1,0 +1,7 @@
+[project]
+name = "simple-ice-cream-parlor"
+version = "0.1.0"
+description = "An ice cream parlor system"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = []
